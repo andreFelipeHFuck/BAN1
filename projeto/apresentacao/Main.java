@@ -11,9 +11,19 @@ import projeto.persistencia.Conexao;
 
 public class Main {
 
+
     public static void main(String[] args) {
+
+
         Conexao c = new Conexao();
         Connection con = c.getConnection();
+
+        try{
+            new PessoaFisicaApresentacao().createPessoFisica(con);
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+
     }
     
 }
