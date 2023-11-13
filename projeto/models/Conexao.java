@@ -1,4 +1,4 @@
-package projeto.persistencia;
+package projeto.models;
 
 
 import java.sql.Connection;

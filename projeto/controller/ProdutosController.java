@@ -1,4 +1,4 @@
-package projeto.controllers;
+package projeto.controller;
 
 import projeto.dados.Produtos;
 import projeto.models.ProdutosModel;

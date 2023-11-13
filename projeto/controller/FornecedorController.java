@@ -1,4 +1,4 @@
-package projeto.controllers;
+package projeto.controller;
 
 import projeto.dados.Fornecedor;
 import projeto.models.FornecedorModel;

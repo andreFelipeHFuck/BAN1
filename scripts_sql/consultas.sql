@@ -1,8 +1,6 @@
 -- Consultas
 
--- Inserção de dados
-
--- Clientes
+-- Inserção de dados-- Clientes
 
 -- Cliente.tipo = 1 é pessoa física -> dataNascimento, sexo e CPF != NULL e CNPJ == NULL
 -- Cliente.tipo = 2 é pessoa jurídica -> dataNascimento, sexo e CPF == NULL e CNPJ != NULL
@@ -16,11 +14,15 @@ VALUES (1, 'Andre', '2001-12-06', 'M', 'andre@email.com', '47999994365', 'Impera
 INSERT INTO clientes (tipo, nome, datanascimento, sexo, email, telefone, rua, bairro, cep, cpf)
 VALUES (1, 'Andre', '2001-12-06', 'M', 'andre@email.com', '47999994365', 'Imperador', 'Itaum', 123, '126');
 
+SELECT codCliente, nome, datanascimento, sexo, email, telefone, rua, bairro, cep, cpf FROM clientes
+WHERE tipo=1;
+
 -- Pessoa Jurídica 
 INSERT INTO clientes (tipo, nome, email, telefone, rua, bairro, cep, cnpj)
 VALUES (2, 'RoboCore', 'robocore@email.com', '1135227626', 'Imperador', 'Floresta', 321, '621');
 
-SELECT * FROM clientes;
+SELECT codCliente, nome, email, telefone, rua, bairro, cep, cnpj FROM clientes
+WHERE tipo=2;
 
 -- Produto 
 INSERT INTO produtos (precounitvenda, precounitcompra, descricao, quantidade, datasheet)

@@ -12,13 +12,8 @@ public class Clientes{
     private int cep;
     private String bairro;
     private int tipo;
-    private Date dataNascimento;
-    private String sexo;
-    private String cpf;
-    private String cnpj;
-
-    public Clientes(int codCliente, String email, String telefone, String nome, String rua, int cep, String bairro, int tipo,
-                    Date dataNascimento, String sexo, String cpf, String cnpj){
+    
+    public Clientes(int codCliente, String email, String telefone, String nome, String rua, int cep, String bairro, int tipo){
         this.codCliente = codCliente; 
         this.email = email;               
         this.telefone = telefone;
@@ -26,12 +21,9 @@ public class Clientes{
         this.rua = rua;
         this.cep = cep;
         this.bairro = bairro;
-        this.tipo = tipo;
-        this.dataNascimento = dataNascimento;
-        this.sexo = sexo;
-        this.cpf = cpf;
-        this.cnpj = cnpj;              
+        this.tipo = tipo;           
     }
+
     public int getCodCliente() {
         return codCliente;
     }
@@ -80,33 +72,9 @@ public class Clientes{
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-    public String getSexo() {
-        return sexo;
-    }
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-    public String getCpf() {
-        return cpf;
-    }
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-    public String getCnpj() {
-        return cnpj;
-    }
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
+    
     public String toString() {
         return "codCliente:" + codCliente + " email:" + email + " telefone:" + telefone + " nome:" + nome + " rua:" + rua + " cep:" + cep + " bairro:" + bairro + 
-                " tipo:" + tipo + " dataNascimento:" + dataNascimento + " sexo:" + sexo + " cpf:" + cpf + " cnpj:" + cnpj;
+                " tipo:" + tipo;
     }
 }
-

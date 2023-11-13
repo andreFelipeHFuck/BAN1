@@ -1,17 +1,21 @@
-package projeto.apresentacao;
+package projeto.controller;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.Iterator;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.HashSet;
+import java.sql.Date;
 
 import projeto.dados.PessoaFisica;
-import projeto.negocio.PessoaFisicaNegocio;
+import projeto.models.PessoaFisicaModel;
 
-public class PessoaFisicaApresentacao{
+public class PessoaFisicaController {
+
     public void createPessoFisica(Connection con) throws SQLException{
-        Scanner input = new Scanner(System.in);
+         Scanner input = new Scanner(System.in);
 
+        System.out.println("Pesoa Física");
         System.out.println("Insira os seguintes dados para criar um novo cliente:");
         
         System.out.print("Nome:\n> ");
@@ -48,14 +52,20 @@ public class PessoaFisicaApresentacao{
         System.out.print("CPF:\n> ");
         String cpf = input.nextLine();
 
+        PessoaFisica p = new PessoaFisica(0, 1, nome, dataNascimento, sexo, email, telefone, rua, bairro, cep, cpf);
+        PessoaFisicaModel.create(p, con);
 
-        PessoaFisica p = new PessoaFisica(0, email, telefone, nome, rua, cep, bairro, 1, dataNascimento, sexo, cpf);
-        PessoaFisicaNegocio pn = new PessoaFisicaNegocio();
-        pn.createPessoFisica(p, con);
-        System.out.println("Pessoa Criada");
+        System.out.println("Cliente criado com sucesso!");
+
     }
 
-    
+    public static void listarPessoaFisica(Connection con) throws SQLException{
+        HashSet all = PessoaFisicaModel.listAll(con);
+        Iterator<PessoaFisica> it = all.iterator();
 
-
+        while (it.hasNext()) {
+            System.out.println(it.next().toString());
+            System.out.println();
+        }
+    }    
 }

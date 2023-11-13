@@ -1,10 +1,12 @@
 package projeto.dados;
 
+import java.sql.Date;
+
 public class PessoaJuridica extends Clientes{
     private String cnpj;
 
-    public PessoaJuridica(int codCliente, String email, String telefone, String nome, String rua, 
-    int cep, String bairro, int tipo, String cnpj){
+    public PessoaJuridica(int codCliente, int tipo, String nome, String email, String telefone, 
+    String rua, String bairro, int cep, String cpf){
         super(codCliente, email, telefone, nome, rua, 
         cep,  bairro,tipo);
         this.cnpj = cnpj;

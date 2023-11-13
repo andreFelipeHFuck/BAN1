@@ -3,25 +3,24 @@ package projeto.dados;
 import java.sql.Date;
 
 public class PessoaFisica extends Clientes {
-    private Date dataNacimento;
+    private Date dataNascimento;
     private String sexo;
     private String cpf;
 
-    public PessoaFisica(int codCliente, String email, String telefone, String nome, String rua, 
-    int cep, String bairro, int tipo, Date dataNacimento, String sexo, String cpf){
-        super(codCliente, email, telefone, nome, rua, 
-        cep,  bairro,tipo);
-        this.dataNacimento = dataNacimento;
+    public PessoaFisica(int codCliente, int tipo, String nome, Date dataNascimento, String sexo, String email, String telefone, 
+    String rua, String bairro, int cep, String cpf){
+        super(codCliente, email, telefone, nome, rua, cep, bairro, tipo);
+        this.dataNascimento = dataNascimento;
         this.sexo = sexo;
         this.cpf = cpf;
     }
 
     public Date getDataNacimento() {
-        return dataNacimento;
+        return dataNascimento;
     }
-
+    
     public void setDataNacimento(Date dataNacimento) {
-        this.dataNacimento = dataNacimento;
+        this.dataNascimento = dataNacimento;
     }
 
     public String getSexo() {
@@ -40,9 +39,17 @@ public class PessoaFisica extends Clientes {
         this.cpf = cpf;
     }
 
+    // SELECT codCliente, nome, datanascimento, sexo, email, telefone, rua, bairro, cep, cpf FROM clientes
+
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return super.toString();
+        StringBuffer sb = new StringBuffer();
+        sb.append(
+            "\nSexo: " + sexo
+            + "\nEmail: " + getEmail()
+            + "\nCPF:" + cpf
+        );
+
+        return sb.toString();
     }
 }
