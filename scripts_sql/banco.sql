@@ -47,7 +47,7 @@ create table Transportadora(
     nome varchar(50) NOT NULL,
     cnpj varchar(20) NOT NULL,
     email varchar(50) NOT NULL,
-    custoKM DOUBLE PRECISION,
+    custoKM DOUBLE PRECISION NOT NULL,
     primary key (codTransportadora)
 );
 

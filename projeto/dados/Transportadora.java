@@ -8,10 +8,11 @@ public class Transportadora {
     private float custoKM;
 
 
-    public Transportadora(int codTransportadora, String nome, String cnpj, float custoKM){
+    public Transportadora(int codTransportadora, String nome, String cnpj,  String email, float custoKM){
         this.codTransportadora = codTransportadora;
         this.nome = nome;
         this.cnpj = cnpj;
+        this.email = email;
         this.custoKM = custoKM;
     }
 

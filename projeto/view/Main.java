@@ -9,10 +9,10 @@ import java.util.Scanner;
 
 import projeto.controller.PessoaFisicaController;
 import projeto.controller.PessoaJuridicaController;
+import projeto.controller.TransportadoraController;
 import projeto.models.Conexao;
 
 public class Main {
-
 
     public static void main(String[] args) throws SQLException{
 
@@ -38,7 +38,12 @@ public class Main {
                     case 4:
                         new PessoaJuridicaController().listarPessoaJuridica(con);
                         break;
-                
+                    case 5:
+                        new TransportadoraController().createTransportadora(con);
+                        break;
+                    case 6:
+                        new TransportadoraController().listarTransportadoras(con);
+                        break;
                     default:
                         break;
                 }
@@ -46,7 +51,7 @@ public class Main {
                 System.out.println(ex.getMessage());
                 continue;
             }
-        }while(op>0 && op < 5);
+        }while(op>0 && op < 7);
         con.close();
     }
 
@@ -55,7 +60,9 @@ public class Main {
         System.out.println("1 -- Inserir um novo cliente (Pessoa Física)");
         System.out.println("2 -- Listar todos os clientes (Pessoa Física)");
         System.out.println("3 -- Inserir um novo cliente (Pessoa Jurídica)");
-        System.out.println("4 -- Listar todos os novos cliente (Pessoa Jurídica)");
+        System.out.println("4 -- Listar todos os cliente (Pessoa Jurídica)");
+        System.out.println("5 -- Inserir uma nova transportadora");
+        System.out.println("6 -- Listar todos as Transportadoras");
         System.out.println("Sua opção: ");
         Scanner input = new Scanner(System.in);
         return input.nextInt();

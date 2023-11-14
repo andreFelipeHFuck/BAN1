@@ -47,6 +47,8 @@ SELECT * FROM fornecedor
 INSERT INTO transportadora (nome, cnpj, email, custokm)
 VALUES ('Trans1', '1234567', 'trans1@email.com', 2.3);
 
+SELECT codTransportadora, nome, cnpj, email, custokm FROM transportadora;
+
 
 SELECT * FROM transportadora
 
