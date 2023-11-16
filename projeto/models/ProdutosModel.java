@@ -13,31 +13,33 @@ public class ProdutosModel {
 
     public static void create(Produtos produto, Connection con) throws SQLException {
         PreparedStatement st;
-        st = con.prepareStatement("INSERT INTO Produtos (codProduto, precoUnitVenda, precoUnitCompra, descricao, quantidade, datasheet) VALUES (?,?,?,?,?,?)");
-        st.setInt(1, produto.getCodProduto());
-        st.setInt(2, produto.getPrecoUnitVenda());
-        st.setInt(3, produto.getPrecoUnitCompra());
-        st.setString(4, produto.getDescricao());
-        st.setInt(5, produto.getQuantidade());
+        st = con.prepareStatement("INSERT INTO Produtos (precoUnitVenda, precoUnitCompra, descricao, quantidade, nome, datasheet) VALUES (?,?,?,?,?,?)");
+        st.setFloat(1, produto.getPrecoUnitVenda());
+        st.setFloat(2, produto.getPrecoUnitCompra());
+        st.setString(3, produto.getDescricao());
+        st.setInt(4, produto.getQuantidade());
+        st.setString(5, produto.getNome());
         st.setString(6, produto.getDatasheet());
+        
         st.execute();
         st.close();
     }
 
     public static HashSet<Produtos> listAll(Connection con) throws SQLException {
         Statement st;
-        HashSet<Produtos> list = new HashSet<>();
+        HashSet<Produtos> list = new HashSet();
         st = con.createStatement();
-        String sql = "SELECT codProduto, precoUnitVenda, precoUnitCompra, descricao, quantidade, datasheet FROM Produtos";
+        String sql = "SELECT codProduto, precoUnitVenda, precoUnitCompra, descricao, quantidade, nome, datasheet FROM produtos";
         ResultSet result = st.executeQuery(sql);
         while (result.next()) {
             list.add(new Produtos(
                     result.getInt(1),
-                    result.getInt(2),
-                    result.getInt(3),
+                    result.getFloat(2),
+                    result.getFloat(3),
                     result.getString(4),
                     result.getInt(5),
-                    result.getString(6)));
+                    result.getString(6),
+                    result.getString(7)));
         }
         return list;
     }

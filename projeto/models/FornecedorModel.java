@@ -13,11 +13,10 @@ public class FornecedorModel {
 
     public static void create(Fornecedor fornecedor, Connection con) throws SQLException {
         PreparedStatement st;
-        st = con.prepareStatement("INSERT INTO Fornecedor (codFornecedor, nome, cnpj, email) VALUES (?,?,?,?)");
-        st.setInt(1, fornecedor.getCodFornecedor());
-        st.setString(2, fornecedor.getNome());
-        st.setString(3, fornecedor.getCnpj());
-        st.setString(4, fornecedor.getEmail());
+        st = con.prepareStatement("INSERT INTO Fornecedor ( nome, cnpj, email) VALUES (?,?,?)");
+        st.setString(1, fornecedor.getNome());
+        st.setString(2, fornecedor.getCnpj());
+        st.setString(3, fornecedor.getEmail());
         st.execute();
         st.close();
     }
