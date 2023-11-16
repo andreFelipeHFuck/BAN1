@@ -1,7 +1,5 @@
 package projeto.dados;
 
-import java.sql.Date;
-
 public class Clientes{
     
     private int codCliente;
@@ -23,7 +21,6 @@ public class Clientes{
         this.bairro = bairro;
         this.tipo = tipo;           
     }
-
     public int getCodCliente() {
         return codCliente;
     }
@@ -72,9 +69,9 @@ public class Clientes{
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
-    
+    @Override
     public String toString() {
-        return "codCliente:" + codCliente + " email:" + email + " telefone:" + telefone + " nome:" + nome + " rua:" + rua + " cep:" + cep + " bairro:" + bairro + 
-                " tipo:" + tipo;
+        // TODO Auto-generated method stub
+        return super.toString();
     }
 }

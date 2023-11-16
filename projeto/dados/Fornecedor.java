@@ -38,6 +38,9 @@ public class Fornecedor {
         this.email = email;
     }
     public String toString() {
-        return "codFornecedor:" + codFornecedor + " nome:" + nome + " cnpj:" + cnpj + " email:" + email;
+        return "codFornecedor:" + codFornecedor + '\n' +
+                "nome:" + nome + '\n' +
+                "cnpj:" + cnpj + '\n' +
+                "email:" + email;
     }
 }

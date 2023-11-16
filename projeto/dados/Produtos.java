@@ -3,18 +3,20 @@ package projeto.dados;
 public class Produtos {
     
     private int codProduto;
-    private int precoUnitVenda;
-    private int precoUnitCompra;
+    private float precoUnitVenda;
+    private float precoUnitCompra;
     private String descricao;
     private int quantidade;
     private String datasheet;
+    private String nome;
 
-    public Produtos(int codProduto, int precoUnitVenda, int precoUnitCompra, String descricao, int quantidade, String datasheet) {
+    public Produtos(int codProduto, float precoUnitVenda, float precoUnitCompra, String descricao, int quantidade,String nome, String datasheet) {
         this.codProduto = codProduto;
         this.precoUnitVenda = precoUnitVenda;
         this.precoUnitCompra = precoUnitCompra;
         this.descricao = descricao;
         this.quantidade = quantidade;
+        this.nome = nome;
         this.datasheet = datasheet;
     }
     public int getCodProduto() {
@@ -23,13 +25,13 @@ public class Produtos {
     public void setCodProduto(int codProduto) {
         this.codProduto = codProduto;
     }
-    public int getPrecoUnitVenda() {
+    public float getPrecoUnitVenda() {
         return precoUnitVenda;
     }
     public void setPrecoUnitVenda(int precoUnitVenda) {
         this.precoUnitVenda = precoUnitVenda;
     }
-    public int getPrecoUnitCompra() {
+    public float getPrecoUnitCompra() {
         return precoUnitCompra;
     }
     public void setPrecoUnitCompra(int precoUnitCompra) {
@@ -53,8 +55,20 @@ public class Produtos {
     public void setDatasheet(String datasheet) {
         this.datasheet = datasheet;
     }
-    public String toString() {
-        return "codProduto:" + codProduto + " precoUnitVenda:" + precoUnitVenda + " precoUnitCompra:" + precoUnitCompra + " descricao:" + descricao
-         + " quantidade:" + quantidade + " datasheet:" + datasheet;
+    public String getNome() {
+        return nome;
     }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    public String toString() {
+        return "codProduto:" + codProduto + '\n' + 
+                "nome:" + nome + '\n' +
+                "precoUnitVenda:" + precoUnitVenda + '\n' +
+                "precoUnitCompra:" + precoUnitCompra + '\n' +
+                "descricao:" + descricao + '\n' +
+                "quantidade:" + quantidade + '\n' +
+                "datasheet:" + datasheet;
+                
+    } 
 }

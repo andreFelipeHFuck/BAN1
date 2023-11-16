@@ -6,12 +6,14 @@ public class Kits {
     private int codKitProduto;
     private int codProduto;
     private int quantidadeProduto;
+    private String nome;
 
-    public Kits(int codKit, int codKitProduto, int codProduto, int quantidadeProduto) {
+    public Kits(int codKit, int codKitProduto, int codProduto, int quantidadeProduto, String nome) {
         this.codKit = codKit;
         this.codKitProduto = codKitProduto;
         this.codProduto = codProduto;
         this.quantidadeProduto = quantidadeProduto;
+        this.nome = nome;
     }
     public int getCodKit() {
         return codKit;
@@ -37,7 +39,17 @@ public class Kits {
     public void setQuantidadeProduto(int quantidadeProduto) {
         this.quantidadeProduto = quantidadeProduto;
     }
+    public String getNome() {
+        return nome;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
     public String toString() {
-        return "codKit:" + codKit + " codKitProduto:" + codKitProduto + " codProduto:" + codProduto + " quantidadeProduto:" + quantidadeProduto;
+        return  "codKit: " + codKit + '\n' +
+                "codKitProduto: " + codKitProduto + '\n' +
+                "codProduto: " + codProduto + '\n' +
+                "quantidadeProduto: " + quantidadeProduto + '\n' +
+                "nome: " + nome;
     }
 }
