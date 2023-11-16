@@ -7,12 +7,12 @@ public class Venda {
     private int codVenda;
     private int codCliente;
     private int codProduto;
-    private float quantidade;
+    private int quantidade;
     private String formaPagamento;
     private int codTransportadora;
     private Date data;
 
-    public Venda(int codVenda, int codCliente, int codProduto, float quantidade, String formaPagamento, int codTransportadora, Date data){
+    public Venda(int codVenda, int codCliente, int codProduto, int quantidade, String formaPagamento, int codTransportadora, Date data){
         this.codVenda = codVenda;
         this.codCliente = codCliente;
         this.codProduto = codProduto;
@@ -50,11 +50,11 @@ public class Venda {
         this.codProduto = codProduto;
     }
 
-   public float getQuantidade() {
+   public int getQuantidade() {
        return quantidade;
    }
 
-   public void setQuantidade(float quantidade) {
+   public void setQuantidade(int quantidade) {
        this.quantidade = quantidade;
    }
 

@@ -54,5 +54,15 @@ SELECT * FROM transportadora
 
 -- Venda
 
--- Compra
+-- Precisa de Cliente, Produto e Transportadora
 
+INSERT INTO venda (codcliente, codproduto, quantidade, formapagamento, codtransportadora, data)
+VALUES(3, 1, 1000, 'pix', 2, '2023-12-11');
+
+SELECT codvenda, codcliente, codproduto, quantidade, formapagamento, codtransportadora, data FROM venda;
+
+-- Compra
+INSERT INTO compra (codfornecedor, codproduto, quantidade, codtransportadora, data)
+VALUES(1, 1, 1000, 3, '2023-12-25');
+
+SELECT codcompra, codfornecedor, codproduto, quantidade, codtransportadora, data FROM compra;
