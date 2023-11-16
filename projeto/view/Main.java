@@ -10,6 +10,9 @@ import java.util.Scanner;
 import projeto.controller.PessoaFisicaController;
 import projeto.controller.PessoaJuridicaController;
 import projeto.controller.TransportadoraController;
+import projeto.controller.ProdutosController;
+import projeto.controller.FornecedorController;
+import projeto.controller.KitsController;
 import projeto.models.Conexao;
 
 public class Main {
@@ -44,6 +47,24 @@ public class Main {
                     case 6:
                         new TransportadoraController().listarTransportadoras(con);
                         break;
+                    case 7:
+                        new ProdutosController().createProduto(con);
+                        break;
+                    case 8:
+                        new ProdutosController().listarProdutos(con);
+                        break;
+                    case 9:
+                        new FornecedorController().createFornecedor(con);
+                        break;
+                    case 10:
+                        new FornecedorController().listarFornecedores(con);
+                        break;
+                    case 11:
+                        new KitsController().createKit(con);
+                        break;
+                    case 12:
+                        new KitsController().listarKits(con);
+                        break;
                     default:
                         break;
                 }
@@ -51,7 +72,7 @@ public class Main {
                 System.out.println(ex.getMessage());
                 continue;
             }
-        }while(op>0 && op < 7);
+        }while(op>0 && op < 13);
         con.close();
     }
 
@@ -63,6 +84,12 @@ public class Main {
         System.out.println("4 -- Listar todos os cliente (Pessoa Jurídica)");
         System.out.println("5 -- Inserir uma nova transportadora");
         System.out.println("6 -- Listar todos as Transportadoras");
+        System.out.println("7 -- Inserir um novo produto");
+        System.out.println("8 -- Listar todos os produtos");
+        System.out.println("9 -- Inserir um novo fornecedor");
+        System.out.println("10 -- Listar todos os fornecedores");
+        System.out.println("11 -- Inserir um novo kit");
+        System.out.println("12 -- Listar todos os kits");
         System.out.println("Sua opção: ");
         Scanner input = new Scanner(System.in);
         return input.nextInt();
