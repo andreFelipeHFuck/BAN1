@@ -14,9 +14,6 @@ public class FornecedorController {
     public void createFornecedor(Connection con) throws SQLException {
         Scanner input = new Scanner(System.in);
         System.out.println("Insira os seguintes dados para criar um novo fornecedor:");
-        System.out.println("codFornecedor:");
-        int codFornecedor = input.nextInt();
-        input.nextLine(); 
         System.out.println("nome:");
         String nome = input.nextLine();
         System.out.println("cnpj:");
@@ -24,7 +21,7 @@ public class FornecedorController {
         System.out.println("email:");
         String email = input.nextLine();
 
-        Fornecedor fornecedor = new Fornecedor(codFornecedor, nome, cnpj, email);
+        Fornecedor fornecedor = new Fornecedor(0, nome, cnpj, email);
         FornecedorModel.create(fornecedor, con);
         System.out.println("Fornecedor criado com sucesso!!");
     }
@@ -34,6 +31,7 @@ public class FornecedorController {
         Iterator<Fornecedor> it = all.iterator();
         while(it.hasNext()){
             System.out.println(it.next().toString());
+            System.out.println();
         }
     }
 }

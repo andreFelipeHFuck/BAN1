@@ -14,9 +14,6 @@ public class KitsController {
     public void createKit(Connection con) throws SQLException{
         Scanner input = new Scanner(System.in);
         System.out.println("Insira os seguintes dados para criar um novo kit:");
-        System.out.println("codKit:");
-        int codKit = input.nextInt();
-        input.nextLine();
         System.out.println("codKitProduto:");
         int codKitProduto = input.nextInt();
         input.nextLine();
@@ -26,11 +23,13 @@ public class KitsController {
         System.out.println("quantidadeProduto:");
         int quantidadeProduto = input.nextInt();
         input.nextLine();
-        Kits k = new Kits(codKit, codKitProduto, codProduto, quantidadeProduto);
+        System.out.println("nome:");
+        String nome = input.nextLine();
+        Kits k = new Kits(0, codKitProduto, codProduto, quantidadeProduto, nome);
         KitsModel.create(k, con);
         System.out.println("Kit criado com sucesso!!");
     }
-    void listarKits(Connection con) throws SQLException{
+    public void listarKits(Connection con) throws SQLException{
         HashSet<Kits> all = KitsModel.listAll(con);
         Iterator<Kits> it = all.iterator();
         while(it.hasNext()){

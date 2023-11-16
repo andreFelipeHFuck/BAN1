@@ -14,31 +14,30 @@ public class ProdutosController {
     public void createProduto(Connection con) throws SQLException {
         Scanner input = new Scanner(System.in);
         System.out.println("Insira os seguintes dados para criar um novo produto:");
-        System.out.println("codProduto:");
-        int codProduto = input.nextInt();
         System.out.println("precoUnitVenda:");
-        int precoUnitVenda = input.nextInt();
+        float precoUnitVenda = Float.parseFloat(input.nextLine());
         System.out.println("precoUnitCompra:");
-        int precoUnitCompra = input.nextInt();
-        input.nextLine();
+        float precoUnitCompra = Float.parseFloat(input.nextLine());
         System.out.println("descricao:");
         String descricao = input.nextLine();
         System.out.println("quantidade:");
-        int quantidade = input.nextInt();
-        input.nextLine();
+        int quantidade = Integer.parseInt(input.nextLine());
+        System.out.println("nome:");
+        String nome = input.nextLine();
         System.out.println("datasheet:");
         String datasheet = input.nextLine();
 
-        Produtos produto = new Produtos(codProduto, precoUnitVenda, precoUnitCompra, descricao, quantidade, datasheet);
+        Produtos produto = new Produtos(0 , precoUnitVenda, precoUnitCompra, descricao, quantidade, nome, datasheet);
         ProdutosModel.create(produto, con);
         System.out.println("Produto criado com sucesso!!");
     }
 
     public void listarProdutos(Connection con) throws SQLException {
-        HashSet<Produtos> all = ProdutosModel.listAll(con);
+        HashSet all = ProdutosModel.listAll(con);
         Iterator<Produtos> it = all.iterator();
         while(it.hasNext()){
             System.out.println(it.next().toString());
+            System.out.println();
         }
     }
 }
