@@ -20,6 +20,7 @@ create table Produtos(
     precoUnitCompra DOUBLE PRECISION NOT NULL,
     descricao varchar(200) NOT NULL,
     quantidade int NOT NULL,
+	nome varchar(50),
     datasheet varchar(1000),
     primary key (codProduto)
 );
@@ -28,6 +29,7 @@ create table Kits(
     codKit serial,
     codKitProduto serial,
     codProduto serial,
+	nome varchar(50),
     quantidadeProduto int NOT NULL,
     primary key (codKit),
     foreign key (codProduto) references Produtos,
