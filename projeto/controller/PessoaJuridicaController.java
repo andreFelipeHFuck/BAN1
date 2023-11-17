@@ -1,6 +1,9 @@
 package projeto.controller;
 
 import java.util.Scanner;
+
+import org.postgresql.core.SqlCommand;
+
 import java.util.Iterator;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -9,6 +12,7 @@ import java.sql.Date;
 
 import projeto.dados.PessoaJuridica;
 import projeto.models.PessoaJuridicaModel;
+import projeto.controller.TrimestreController;
 
 public class PessoaJuridicaController {
     public void createPessoaJuridica(Connection con) throws SQLException{
@@ -52,6 +56,51 @@ public class PessoaJuridicaController {
         while (it.hasNext()) {
             System.out.println(it.next().toString());
             System.out.println();
+        }
+    }
+
+    public static void listarPessoasJuridicasPrincipais(Connection con) throws SQLException{
+        HashSet all = PessoaJuridicaModel.listPessoasJuridicasPrincipais(con);
+        Iterator<PessoaJuridica> it = all.iterator();
+
+        while (it.hasNext()) {
+            System.out.println(it.next().toString());
+            System.out.println();
+        }
+    }
+
+    public static void listarPessoasJuridicasCompraramMenosTrimestre(Connection con) throws SQLException{
+        Scanner input = new Scanner(System.in);
+
+        System.out.println();
+        System.out.println("Insira os seguintes dados: ");
+
+        System.out.print("Ano:\n> ");
+        int ano = input.nextInt();
+
+        TrimestreController tri1 = new TrimestreController();
+        int op = 0;
+        do{
+            op = tri1.menuTrimestre();
+        }while (op == 0 || op > 4);
+        int t = tri1.getTrimestre(op);
+
+        HashSet all = PessoaJuridicaModel.listPessoasJuridicasCompraramMenosTrimestre(t, ano, con);
+
+        if(all.size() == 0){
+            System.out.println("Nenhuma Pessoa Jurídica encontrada");
+        }else{
+
+
+            Iterator<PessoaJuridica> it = all.iterator();
+
+            System.out.println();
+            System.out.println(all.size() + " Pessoa(s) Jurídica(s) encontradas: ");
+
+            while (it.hasNext()) {
+                System.out.println(it.next().toString());
+                System.out.println();
+            }
         }
     }
 }

@@ -60,7 +60,7 @@ FROM clientes c JOIN venda v ON c.codcliente=v.codcliente
 JOIN produtos p ON p.codproduto=v.codproduto
 WHERE c.tipo = 2
 GROUP BY c.cnpj, c.nome, c.cep
-ORDER BY qtdProdutosVendidos, valor;
+ORDER BY valor DESC, qtdProdutosVendidos;
 
 -- Subconsulta
 -- Faça uma consulta que liste os clientes que tenha diminuido o número de produtos comprados de um trimestre para outro em um
@@ -70,11 +70,11 @@ ORDER BY qtdProdutosVendidos, valor;
 
 SELECT nome, cnpj, telefone FROM clientes c
 WHERE tipo=2
-AND (SELECT COUNT(*) FROM venda 
-	  WHERE c.codcliente=codcliente AND DATE_PART('MONTH', data)>=1 AND DATE_PART('MONTH', data)<=3)
+AND (SELECT SUM(quantidade) FROM venda 
+	  WHERE c.codcliente=codcliente AND DATE_PART('MONTH', data)>=4 AND DATE_PART('MONTH', data)<=6 AND DATE_PART('YEAR', data) = 2023)
 	  > 
-	 (SELECT COUNT(*) FROM venda 
-	  WHERE c.codcliente=codcliente AND DATE_PART('MONTH', data)>=4 AND DATE_PART('MONTH', data)<=6);
+	 (SELECT SUM(quantidade) FROM venda 
+	  WHERE c.codcliente=codcliente AND DATE_PART('MONTH', data)>=7 AND DATE_PART('MONTH', data)<=9 AND DATE_PART('YEAR', data) = 2023);
 
 
 

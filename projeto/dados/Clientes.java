@@ -27,6 +27,11 @@ public class Clientes{
         this.cep = cep;
     }
 
+    public Clientes(String nome, String telefone){
+        this.nome = nome;
+        this.telefone = telefone;
+    }
+
     public int getCodCliente() {
         return codCliente;
     }

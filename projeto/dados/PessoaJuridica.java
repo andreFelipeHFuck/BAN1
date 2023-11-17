@@ -12,6 +12,16 @@ public class PessoaJuridica extends Clientes{
         this.cnpj = cnpj;
     }
 
+    public PessoaJuridica(String nome, String cnpj, int cep){
+        super(nome, cep);
+        this.cnpj = cnpj;
+    }
+
+    public PessoaJuridica(String nome, String telefone, String cnpj){
+        super(nome, telefone);
+        this.cnpj = cnpj;
+    }
+    
     public String getCnpj() {
         return cnpj;
     }

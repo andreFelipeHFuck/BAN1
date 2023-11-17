@@ -52,7 +52,9 @@ VALUES (1, 1, 2, 2, 'pix', '2023-11-16'),
 (3, 5, 1, 3, 'pix', '2023-11-20'),
 (6, 1, 3, 50, 'boleto', '2023-11-21'),
 (6, 4, 3, 100, 'boleto', '2023-11-28'),
-(7, 6, 2, 30, 'pix', '2023-11-22');
+(7, 6, 2, 30, 'pix', '2023-11-22'),
+(6, 1, 3, 35, 'boleto, '2023-08-03'),
+ (6, 1, 3, 50, 'boleto', '2023-05-03');
 
 -- Compra
 INSERT INTO Compra (codFornecedor, codProduto, codTransportadora, quantidade, data)

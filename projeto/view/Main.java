@@ -88,11 +88,13 @@ public class Main {
         System.out.println("Informe o número da opção que deseja executar: ");
         System.out.println("1 -- Inserir um nova Pessoa Física");
         System.out.println("2 -- Listar todas as Pessoas Físicas");
-        System.out.println("3 -- Listar todas as pessoas Físicas que compraram em um determinada Trimestre");
-        System.out.println("4 -- Número de pessoas Físicas que compraram todos os produtos");
+        System.out.println("3 -- Listar todas as Pessoas Físicas que compraram em um determinada Trimestre");
+        System.out.println("4 -- Número de Pessoas Físicas que compraram todos os produtos");
         System.out.println("5 -- Inserir um nova Pessoa Jurídica");
         System.out.println("6 -- Listar todas as Pessoas Jurídicas");
-        System.out.println("7 -- Sair");
+        System.out.println("7 -- Listar principais Pessoas Jurídicas");
+        System.out.println("8 -- Listar Pessoas Jurídicas que compraram menos produtos do que no Trimestre anterior");
+        System.out.println("9 -- Sair");
         System.out.println("Sua opção: ");
         Scanner input = new Scanner(System.in);
         return input.nextInt();
@@ -124,6 +126,12 @@ public class Main {
                     case 6:
                         new PessoaJuridicaController().listarPessoaJuridica(con);
                         break;
+                    case 7:
+                        new PessoaJuridicaController().listarPessoasJuridicasPrincipais(con);
+                        break;
+                    case 8:
+                        new PessoaJuridicaController().listarPessoasJuridicasCompraramMenosTrimestre(con);
+                        break;
                     default:
                         break;
                 }
@@ -131,7 +139,7 @@ public class Main {
                 System.out.println(ex.getMessage());
                 continue;
             }
-        }while(op>0 && op < 7);
+        }while(op>0 && op < 9);
     }
     
 }

@@ -66,7 +66,7 @@ public class PessoaFisicaModel {
         return list;
     }
 
-    public static HashSet listarPessoasFisicasCompraramProdutosSemestre(int tri, int ano, Connection con) throws SQLException{
+    public static HashSet listPessoasFisicasCompraramProdutosSemestre(int tri, int ano, Connection con) throws SQLException{
         Statement st;
         HashSet list = new HashSet();
 
