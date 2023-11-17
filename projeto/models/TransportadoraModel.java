@@ -43,5 +43,16 @@ public static HashSet<Transportadora> listAll(Connection con) throws SQLExceptio
     return list;
 }
 
+public static String getNomeTransportadora(int codTransportadora, Connection con) throws SQLException{
+    Statement st;
+    st = con.createStatement();
+
+    String sql = "SELECT nome FROM transportadora WHERE codtransportadora= " + codTransportadora;
+    ResultSet result = st.executeQuery(sql);
+    result.next();
+
+    return result.getString(1);
+}
+
 
 }

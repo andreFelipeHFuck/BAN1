@@ -43,4 +43,15 @@ public class ProdutosModel {
         }
         return list;
     }
+
+    public static String getNomeProduto(int codProduto, Connection con) throws SQLException{
+        Statement st;
+        st = con.createStatement();
+
+        String sql = "SELECT nome FROM produtos WHERE codproduto= " + codProduto;
+        ResultSet result = st.executeQuery(sql);
+        result.next();
+
+        return result.getString(1);
+    }
 }

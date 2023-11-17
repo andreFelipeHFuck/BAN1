@@ -25,6 +25,7 @@ public class ClientesModel {
         st.execute();
         st.close();
     }
+
     public static HashSet<Clientes> listAll(Connection con) throws SQLException {
         Statement st;
         HashSet<Clientes> list = new HashSet<>();
@@ -43,6 +44,23 @@ public class ClientesModel {
                     result.getInt(8)));
         }
         return list;
+    }
+
+    public static Clientes getCliente(int codCliente, Connection con) throws SQLException{
+        Statement st;
+        st = con.createStatement();
+
+        String sql = "SELECT nome, email, tipo FROM clientes WHERE codcliente= " + codCliente;
+        ResultSet result = st.executeQuery(sql);
+        result.next();
+
+        Clientes c = new Clientes(
+            result.getString(1),
+            result.getString(2),
+            result.getInt(3)
+        );
+
+        return c;
     }
 }
 

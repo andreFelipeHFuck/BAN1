@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.HashSet;
 
 import projeto.dados.Venda;
+import projeto.dados.FormaPagamento;
 
 public class VendaModel {
     public static void create(Venda v, Connection con) throws SQLException{
@@ -34,6 +35,54 @@ public class VendaModel {
 
             st = con.createStatement();
             String sql = "SELECT codvenda, codcliente, codproduto, quantidade, formapagamento, codtransportadora, data FROM venda";
+            ResultSet result = st.executeQuery(sql);
+
+            while (result.next()) {
+                list.add(
+                    new Venda(
+                        result.getInt(1),
+                        result.getInt(2),
+                        result.getInt(3),
+                        result.getInt(4),
+                        result.getString(5),
+                        result.getInt(6),
+                        result.getDate(7)
+                    )
+                );
+            }
+
+            return list;
+    }
+
+    public static HashSet listFormaPagamento(Connection con) throws SQLException{
+        Statement st;
+        HashSet list = new HashSet();
+
+            st = con.createStatement();
+            String sql = "SELECT formapagamento, COUNT(*) " +
+                          "FROM clientes c JOIN venda v ON c.codcliente = v.codcliente " +
+                          "GROUP BY formapagamento";
+            ResultSet result = st.executeQuery(sql);
+
+            while (result.next()) {
+                list.add(
+                    new FormaPagamento(
+                        result.getString(1), 
+                        result.getInt(2))
+                );
+            }
+
+            return list;
+    }
+
+    public static HashSet listVendasClientesPorTipo(int tipo, Connection con) throws SQLException{
+        Statement st;
+        HashSet list = new HashSet();
+
+            st = con.createStatement();
+            String sql = "SELECT codvenda, codcliente, codproduto, quantidade, formapagamento, codtransportadora, data " +
+                         "FROM venda WHERE " + 
+                         "codcliente IN (SELECT codcliente FROM clientes WHERE tipo= " + tipo + " )";
             ResultSet result = st.executeQuery(sql);
 
             while (result.next()) {

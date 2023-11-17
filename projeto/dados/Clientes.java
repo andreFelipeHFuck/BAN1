@@ -32,6 +32,12 @@ public class Clientes{
         this.telefone = telefone;
     }
 
+    public Clientes(String nome, String email, int tipo){
+        this.nome = nome;
+        this.email = email;
+        this.tipo = tipo;
+    }
+
     public int getCodCliente() {
         return codCliente;
     }

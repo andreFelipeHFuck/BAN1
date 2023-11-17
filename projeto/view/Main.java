@@ -13,6 +13,7 @@ import projeto.controller.TransportadoraController;
 import projeto.controller.ProdutosController;
 import projeto.controller.FornecedorController;
 import projeto.controller.KitsController;
+import projeto.controller.VendaController;
 import projeto.models.Conexao;
 
 public class Main {
@@ -55,6 +56,15 @@ public class Main {
                     case 9:
                         new KitsController().listarKits(con);
                         break;
+                    case 10:
+                        new VendaController().listarVendas(con);
+                        break;
+                    case 11:
+                        new VendaController().listarFormaPagamento(con);
+                        break;
+                    case 12:
+                        new VendaController().listarVendasClientesPorTipo(con);
+                        break;
                     default:
                         break;
                 }
@@ -62,7 +72,7 @@ public class Main {
                 System.out.println(ex.getMessage());
                 continue;
             }
-        }while(op>0 && op < 10);
+        }while(op>0 && op < 13);
         con.close();
     }
 
@@ -78,6 +88,9 @@ public class Main {
         System.out.println("7 -- Listar todos os fornecedores");
         System.out.println("8 -- Inserir um novo kit");
         System.out.println("9 -- Listar todos os kits");
+        System.out.println("10 -- Listar todas as Vendas");
+        System.out.println("11 -- Listar as Formas de Pagamentos");
+        System.out.println("12 -- Listar as Vendas por tipo de Cliente");
         System.out.println("Sua opção: ");
         Scanner input = new Scanner(System.in);
         return input.nextInt();
