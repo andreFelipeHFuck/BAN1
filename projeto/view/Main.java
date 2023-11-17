@@ -18,8 +18,7 @@ import projeto.models.Conexao;
 public class Main {
 
     public static void main(String[] args) throws SQLException{
-
-
+        
         Conexao c = new Conexao();
         Connection con = c.getConnection();
 
@@ -30,39 +29,30 @@ public class Main {
             try{
                 switch (op) {
                     case 1:
-                       new PessoaFisicaController().createPessoFisica(con);
-                        break;
+                       menuCliente(con);
+                       break;
                     case 2:
-                        new PessoaFisicaController().listarPessoaFisica(con);
-                        break;
-                    case 3:
-                        new PessoaJuridicaController().createPessoaJuridica(con);
-                        break;
-                    case 4:
-                        new PessoaJuridicaController().listarPessoaJuridica(con);
-                        break;
-                    case 5:
                         new TransportadoraController().createTransportadora(con);
                         break;
-                    case 6:
+                    case 3:
                         new TransportadoraController().listarTransportadoras(con);
                         break;
-                    case 7:
+                    case 4:
                         new ProdutosController().createProduto(con);
                         break;
-                    case 8:
+                    case 5:
                         new ProdutosController().listarProdutos(con);
                         break;
-                    case 9:
+                    case 6:
                         new FornecedorController().createFornecedor(con);
                         break;
-                    case 10:
+                    case 7:
                         new FornecedorController().listarFornecedores(con);
                         break;
-                    case 11:
+                    case 8:
                         new KitsController().createKit(con);
                         break;
-                    case 12:
+                    case 9:
                         new KitsController().listarKits(con);
                         break;
                     default:
@@ -72,27 +62,76 @@ public class Main {
                 System.out.println(ex.getMessage());
                 continue;
             }
-        }while(op>0 && op < 13);
+        }while(op>0 && op < 10);
         con.close();
     }
 
+
     public static int menu(){
         System.out.println("Informe o número da opção que deseja executar:");
-        System.out.println("1 -- Inserir um novo cliente (Pessoa Física)");
-        System.out.println("2 -- Listar todos os clientes (Pessoa Física)");
-        System.out.println("3 -- Inserir um novo cliente (Pessoa Jurídica)");
-        System.out.println("4 -- Listar todos os cliente (Pessoa Jurídica)");
-        System.out.println("5 -- Inserir uma nova transportadora");
-        System.out.println("6 -- Listar todos as Transportadoras");
-        System.out.println("7 -- Inserir um novo produto");
-        System.out.println("8 -- Listar todos os produtos");
-        System.out.println("9 -- Inserir um novo fornecedor");
-        System.out.println("10 -- Listar todos os fornecedores");
-        System.out.println("11 -- Inserir um novo kit");
-        System.out.println("12 -- Listar todos os kits");
+        System.out.println("1 -- Clientes");
+        System.out.println("2 -- Inserir uma nova transportadora");
+        System.out.println("3 -- Listar todos as Transportadoras");
+        System.out.println("4 -- Inserir um novo produto");
+        System.out.println("5 -- Listar todos os produtos");
+        System.out.println("6 -- Inserir um novo fornecedor");
+        System.out.println("7 -- Listar todos os fornecedores");
+        System.out.println("8 -- Inserir um novo kit");
+        System.out.println("9 -- Listar todos os kits");
         System.out.println("Sua opção: ");
         Scanner input = new Scanner(System.in);
         return input.nextInt();
+    }
+
+    public static int opcoesCliente(){
+        System.out.println("Clientes: ");
+        System.out.println("Informe o número da opção que deseja executar: ");
+        System.out.println("1 -- Inserir um nova Pessoa Física");
+        System.out.println("2 -- Listar todas as Pessoas Físicas");
+        System.out.println("3 -- Listar todas as pessoas Físicas que compraram em um determinada Trimestre");
+        System.out.println("4 -- Número de pessoas Físicas que compraram todos os produtos");
+        System.out.println("5 -- Inserir um nova Pessoa Jurídica");
+        System.out.println("6 -- Listar todas as Pessoas Jurídicas");
+        System.out.println("7 -- Sair");
+        System.out.println("Sua opção: ");
+        Scanner input = new Scanner(System.in);
+        return input.nextInt();
+    }
+
+    public  static void menuCliente(Connection con){
+        int op = 0;
+
+        do{
+            op = opcoesCliente();
+
+            try{
+                switch (op) {
+                    case 1:
+                        new PessoaFisicaController().createPessoFisica(con);
+                        break;
+                    case 2:
+                        new PessoaFisicaController().listarPessoaFisica(con);
+                        break;
+                    case 3:
+                        new PessoaFisicaController().listarPessoaFisicaComprouSemestre(con);
+                        break;
+                    case 4:
+                        new PessoaFisicaController().numPessoasFisicasCompraramTodosOsProdutos(con);
+                        break;
+                    case 5:
+                        new PessoaJuridicaController().createPessoaJuridica(con);
+                        break;
+                    case 6:
+                        new PessoaJuridicaController().listarPessoaJuridica(con);
+                        break;
+                    default:
+                        break;
+                }
+            }catch(SQLException ex){
+                System.out.println(ex.getMessage());
+                continue;
+            }
+        }while(op>0 && op < 7);
     }
     
 }

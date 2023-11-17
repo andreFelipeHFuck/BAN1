@@ -7,7 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
 
+import javax.swing.plaf.nimbus.State;
+
 import projeto.dados.PessoaFisica;
+import projeto.dados.TrimestresConstantes;
 
 public class PessoaFisicaModel {
 
@@ -61,5 +64,45 @@ public class PessoaFisicaModel {
             }
 
         return list;
+    }
+
+    public static HashSet listarPessoasFisicasCompraramProdutosSemestre(int tri, int ano, Connection con) throws SQLException{
+        Statement st;
+        HashSet list = new HashSet();
+
+            st = con.createStatement();
+            String sql = "SELECT DISTINCT c.nome, c.cep FROM clientes c JOIN venda v ON c.codcliente=v.codcliente WHERE tipo=1 AND  DATE_PART('MONTH', v.data) >=" + 
+                         tri + " AND DATE_PART('MONTH', v.data) <=" + (tri+2) +
+                         " AND DATE_PART('YEAR', v.data) =" + ano;
+
+            ResultSet result = st.executeQuery(sql);
+
+            while (result.next()) {
+                list.add(
+                    new PessoaFisica(
+                        result.getString(1),
+                        result.getInt(2)
+                    )
+                );
+            }
+          
+            return list;
+    }
+
+    public static int numPessoasFisicasCompraramTodosOsProdutos(Connection con) throws SQLException{
+        Statement st;
+
+            st = con.createStatement();
+            String sql = "SELECT COUNT(*) FROM clientes c WHERE " +
+                             "NOT EXISTS (SELECT * FROM produtos p WHERE " +
+                                 "NOT EXISTS (SELECT * FROM venda v WHERE " +
+                                       "c.codcliente=v.codcliente AND p.codproduto=v.codproduto)) " +
+                             "AND c.tipo=1";
+            
+            ResultSet result = st.executeQuery(sql);
+            result.next();
+
+            return result.getInt(1);
+            
     }
 }

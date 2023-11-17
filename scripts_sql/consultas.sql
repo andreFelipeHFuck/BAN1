@@ -9,8 +9,8 @@
 
 -- Inserção
 
-INSERT INTO clientes (tipo, nome, datanascimento, sexo, email, telefone, rua, bairro, cep, cpf, cnpj)
-VALUES (1, 'Andre', '2001-12-06', 'M', 'andre@email.com', '47999994365', 'Imperador', 'Itaum', 123, '126', NULL);
+INSERT INTO clientes (tipo, nome, datanascimento, sexo, email, telefone, rua, bairro, cep, cpf)
+VALUES (1, 'Andre', '2001-12-06', 'M', 'andre@email.com', '47999994365', 'Imperador', 'Itaum', 123, '126');
 
 -- Pessoa Fisica:
 
@@ -23,18 +23,17 @@ SELECT codCliente, nome, datanascimento, sexo, email, telefone, rua, bairro, cep
 WHERE tipo=1;
 
 -- JOIN
--- Saber o nome, cep e quantidade do produto das pessoas fisica que compraram  determinado produto no ultimo em um dos quatro trimestre
+-- Saber o nome, cep do produto das pessoas fisica que compraram  determinado produto em um dos quatro trimestre
 -- de um determinado ano
-SELECT c.nome, c.cep, v.quantidade, p.descricao
+SELECT DISTINCT c.nome, c.cep
 FROM clientes c JOIN venda v ON c.codcliente=v.codcliente
-JOIN produtos p ON v.codproduto = p.codproduto
 WHERE tipo=1 AND 
 DATE_PART('MONTH', v.data) >= 10 AND DATE_PART('MONTH', v.data) <= 12
 AND DATE_PART('YEAR', v.data) = 2023;
 
 -- Subconsulta
--- Consulta SQL que mostra os dados do cliente já comprou todos os produtos da loja 
-SELECT * FROM clientes c WHERE 
+-- Consulta SQL que conta quantos clientes já compraram todos os produtos da loja 
+SELECT COUNT(*) FROM clientes c WHERE 
 NOT EXISTS (SELECT * FROM produtos p WHERE
 		   NOT EXISTS (SELECT * FROM venda v WHERE 
 					  	c.codcliente=v.codcliente AND p.codproduto=v.codproduto))
@@ -100,34 +99,55 @@ ORDER BY lucro
 LIMIT 10;
 
 -- Subconsulta
--- 
-
+-- Os produtos mais baratos
+SELECT codProduto, descricao FROM produtos WHERE
+precounitvenda >= ALL (SELECT precounitvenda FROM produtos);
 
 -- Kits:
+SELECT * FROM kits
 
 
 -- Fornecedor:
+-- Insert
 INSERT INTO fornecedor (nome, cnpj, email)
 VALUES ('Forne1', '1234567', 'forne1@email.com' );
 
-
+-- Listar
 SELECT * FROM fornecedor
+
+-- JOIN
+
+
+-- Subconsulta
 
 
 -- Transportadora:
+
+-- Insert
 INSERT INTO transportadora (nome, cnpj, email, custokm)
 VALUES ('Trans1', '1234567', 'trans1@email.com', 2.3);
 
+-- Listar
 SELECT codTransportadora, nome, cnpj, email, custokm FROM transportadora;
 
+-- JOIN
+-- 
+SELECT t.codtransportadora, t.nome, COUNT(*)
+FROM transportadora t JOIN venda v ON t.codtransportadora=v.codtransportadora
+GROUP BY t.codtransportadora;
 
-SELECT * FROM transportadora:
+-- Subconsulta
+SELECT codtransportadora, nome, custokm
+FROM transportadora 
+WHERE custokm >= ALL (SELECT custokm FROM transportadora)
+
+
 
 -- Venda
 
 -- Precisa de Cliente, Produto e Transportadora
 
--- Inserir
+-- Inserção
 INSERT INTO venda (codcliente, codproduto, quantidade, formapagamento, codtransportadora, data)
 VALUES(3, 1, 1000, 'pix', 2, '2023-12-11');
 
@@ -140,8 +160,38 @@ SELECT formapagamento, COUNT(*)
 FROM clientes c JOIN venda v ON c.codcliente = v.codcliente 
 GROUP BY formapagamento;
 
+-- Faça uma consulta SQL que devolva o preço total da compra feita por um cliente, calcule o preço total dos produtos comprados
+-- (aplique o desconto caso a compra seja no Pix) mais o preço total do frete (km * custoKm). Mostre o preço do produto,
+-- preço do frete e o preço total da compra.
+SELECT (p.precounitcompra * v.quantidade) as precoProduto, (10 * t.custokm) as frete,
+(p.precounitcompra * v.quantidade) + (10 * t.custokm) as precoTotal, v.formapagamento
+FROM produtos p JOIN venda v ON p.codproduto=v.codproduto
+JOIN transportadora t ON v.codtransportadora = t.codtransportadora
+WHERE v.formapagamento='pix'
+UNION
+SELECT 0.9 * (p.precounitcompra * v.quantidade) as precoProduto, (10 * t.custokm) as frete, 
+0.9*(p.precounitcompra * v.quantidade) + (10 * t.custokm) as precoTotal, v.formapagamento
+FROM produtos p JOIN venda v ON p.codproduto=v.codproduto
+JOIN transportadora t ON v.codtransportadora = t.codtransportadora
+WHERE v.formapagamento!='pix';
+
+-- Subconsulta
+-- Faça uma pesquisa SQL que devolva todas as pessoas juridica que fizeram compras na loja
+SELECT * FROM venda WHERE 
+codcliente IN (SELECT codcliente FROM clientes WHERE tipo=2);
+
+
 -- Compra:
+-- Inserção
 INSERT INTO compra (codfornecedor, codproduto, quantidade, codtransportadora, data)
 VALUES(1, 1, 1000, 3, '2023-12-25');
 
+-- Listar
 SELECT codcompra, codfornecedor, codproduto, quantidade, codtransportadora, data FROM compra;
+
+-- JOIN 
+-- Solicitar o nome dos produtos mais comprados, ordene pelo preço
+SELECT p.descricao FROM produtos p JOIN compra c ON p.codproduto=c.codproduto
+ORDER BY p.precounitcompra
+
+-- Subconsulta

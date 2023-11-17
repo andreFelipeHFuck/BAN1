@@ -19,8 +19,14 @@ public class Clientes{
         this.rua = rua;
         this.cep = cep;
         this.bairro = bairro;
-        this.tipo = tipo;           
+        this.tipo = tipo;      
     }
+
+    public Clientes(String nome, int cep){
+        this.nome = nome;
+        this.cep = cep;
+    }
+
     public int getCodCliente() {
         return codCliente;
     }
@@ -69,9 +75,15 @@ public class Clientes{
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
+
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return super.toString();
+        return "Codigo do Cliente: " + codCliente 
+        + "\nNome: " + nome 
+        + "\nEmail: " + email
+        + "\nTelefone: " + telefone
+        + "\nRua: " + rua
+        + "\nCEP: " + cep
+        + "\nBairro: " + bairro;
     }
 }

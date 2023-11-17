@@ -15,6 +15,10 @@ public class PessoaFisica extends Clientes {
         this.cpf = cpf;
     }
 
+    public PessoaFisica(String nome, int cep){
+        super(nome, cep);
+    }
+
     public Date getDataNacimento() {
         return dataNascimento;
     }
@@ -39,17 +43,11 @@ public class PessoaFisica extends Clientes {
         this.cpf = cpf;
     }
 
-    // SELECT codCliente, nome, datanascimento, sexo, email, telefone, rua, bairro, cep, cpf FROM clientes
-
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer();
-        sb.append(
-            "\nSexo: " + sexo
-            + "\nEmail: " + getEmail()
-            + "\nCPF:" + cpf
-        );
-
-        return sb.toString();
+        return super.toString() 
+        + "\nSexo: " + sexo
+        + "\nData de Nascimento: " + dataNascimento
+        + "\nCPF: " + cpf; 
     }
 }

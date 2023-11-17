@@ -38,6 +38,7 @@ public class PessoaJuridicaController {
         System.out.print("CNPJ:\n> ");
         String cnpj = input.nextLine();
 
+    
         PessoaJuridica p = new PessoaJuridica(0, 2, nome, email, telefone, rua, bairro, cep, cnpj);
         PessoaJuridicaModel.create(p, con);
 

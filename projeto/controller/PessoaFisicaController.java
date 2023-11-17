@@ -8,7 +8,9 @@ import java.util.HashSet;
 import java.sql.Date;
 
 import projeto.dados.PessoaFisica;
+import projeto.dados.TrimestresConstantes;
 import projeto.models.PessoaFisicaModel;
+import projeto.controller.TrimestreController;
 
 public class PessoaFisicaController {
 
@@ -67,5 +69,40 @@ public class PessoaFisicaController {
             System.out.println(it.next().toString());
             System.out.println();
         }
-    }    
+    }   
+
+
+
+    public static void listarPessoaFisicaComprouSemestre(Connection con) throws SQLException{
+         Scanner input = new Scanner(System.in);
+
+        System.out.println("Insira os seguintes dados: ");
+
+        System.out.print("Ano:\n> ");
+        int ano = input.nextInt();
+
+        TrimestreController tri = new TrimestreController();
+        int op = 0;
+        while (op < 1 && op > 5) {
+            op = tri.menuTrimestre();
+        }
+        int t = tri.getTrimestre(op);
+
+        HashSet all = PessoaFisicaModel.listarPessoasFisicasCompraramProdutosSemestre(t, ano, con);
+        Iterator<PessoaFisica> it = all.iterator();
+
+        while (it.hasNext()) {
+            System.out.println(it.next().toString());
+            System.out.println();
+        }
+        
+    }
+
+    public static void numPessoasFisicasCompraramTodosOsProdutos(Connection con) throws SQLException{
+        int num = PessoaFisicaModel.numPessoasFisicasCompraramTodosOsProdutos(con);
+
+        System.out.println();
+        System.out.println(num + " pessoas Fisícas compraram todos os produtos");
+        System.out.println();
+    }
 }
