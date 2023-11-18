@@ -104,7 +104,32 @@ SELECT codProduto, descricao FROM produtos WHERE
 precounitvenda >= ALL (SELECT precounitvenda FROM produtos);
 
 -- Kits:
+--Insert
+INSERT INTO kits (codKitProduto, codProduto, quantidadeProduto, nome) 
+VALUES (2,1,20,Kit com 20);
+
+--Listar
 SELECT * FROM kits
+
+--JOIN
+--Retornar as informacoes dos produtos dos kits
+SELECT 
+    k.nome AS nomeKit,
+    k.quantidadeProduto,
+	p.nome AS nomeProduto,
+	p.descricao,
+	p.datasheet
+FROM Kits k
+INNER JOIN Produtos p ON k.codProduto = p.codProduto;
+
+--Subconsulta
+--Retornar a quantidade total de produtos em kits utilizando a função SUM
+SELECT 
+    k.codKit,
+    k.nome AS nomeKit,
+    k.quantidadeProduto,
+    (SELECT SUM(quantidadeProduto) FROM Kits) AS totalProdutosEmKits
+FROM Kits k;
 
 
 -- Fornecedor:
@@ -116,9 +141,21 @@ VALUES ('Forne1', '1234567', 'forne1@email.com' );
 SELECT * FROM fornecedor
 
 -- JOIN
-
+--Retornar nome da fornecedora de produtos comprados
+SELECT c.codCompra, c.quantidade, f.nome FROM Compra c
+INNER JOIN Fornecedor f ON c.codFornecedor = f.codFornecedor;
 
 -- Subconsulta
+--Retornar os 3 principais fornecedores ordenados pela quantidade de produtos fornecidos
+SELECT f.nome, totalQuantidade
+FROM Fornecedor f
+INNER JOIN (
+    SELECT codFornecedor, SUM(quantidade) AS totalQuantidade
+    FROM Compra c
+    GROUP BY codFornecedor
+) AS t ON f.codFornecedor = t.codFornecedor
+ORDER BY totalQuantidade DESC
+LIMIT 3;
 
 
 -- Transportadora:

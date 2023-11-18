@@ -26,12 +26,12 @@ VALUES ('Kit Arduino Maker', 'O Kit Arduino Maker, possui diversos componentes v
 ('Display de 7 segmentos', 'Display de 7 segmentos com 1 Dígito (Anodo Comum)', 2.90, 1.5, 1200, NULL)
 
 -- Kits
-INSERT INTO Kits (codProduto, codKitProduto, quantidadeProduto)
-VALUES (1, 	2, 1),
-(1, 3, 1),
-(1, 4, 5),
-(1, 5, 2),
-(1, 6, 1);
+INSERT INTO Kits (codProduto, codKitProduto, nome, quantidadeProduto)
+VALUES (1, 	2, 'kit teste', 1),
+(1, 3, 'kit iniciante', 1),
+(1, 4, 'kit avancado', 5),
+(1, 5, 'kit para colegio', 2),
+(1, 6, 'kit academico', 1);
 
 -- Fornecedor
 INSERT INTO Fornecedor (nome, email, cnpj)
