@@ -18,6 +18,36 @@ import projeto.models.TransportadoraModel;
 public class VendaController {
     public void createVenda(Connection con) throws SQLException{
         Scanner input = new Scanner(System.in);
+
+        int codCliente = ClientesController.listarClientesEnumerados(con);
+        int codProduto = ProdutosController.listarProdutosEnumerados(con);
+        int codTransportadora = TransportadoraController.listarTransportadoraEnumera(con);
+
+        System.out.println("Quantidade\n>");
+        int quantidade = input.nextInt();
+
+        input.nextLine();
+        System.out.println("Forma de pagamento\n>");
+        String formaPagamento = input.nextLine();
+
+        System.out.println("Data da entrega:");
+        System.out.print("Dia:\n> ");
+        String dia = input.nextLine();
+        System.out.println();
+        System.out.print("Mês\n> ");
+        String mes = input.nextLine();
+        System.out.println();
+        System.out.print("Ano:\n> ");
+        String ano = input.nextLine();
+        System.out.println();
+
+        Date data = Date.valueOf(ano + '-' + mes + '-' + dia);
+
+        Venda v = new Venda(0, codCliente, codProduto, quantidade, formaPagamento, codTransportadora, data);
+        VendaModel.create(v, con);
+
+        System.out.println("Venda criada com sucesso");
+
     }
 
     public void printVenda(Venda v, Connection con) throws SQLException{

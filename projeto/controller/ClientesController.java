@@ -5,6 +5,7 @@ import projeto.models.ClientesModel;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -41,7 +42,27 @@ public class ClientesController {
         }
     }
 
-    public static int listarClientesEnumerados() throws SQLException{
-        
+    public static int listarClientesEnumerados(Connection con) throws SQLException{
+        int cont;
+        int op = 0;
+
+        ArrayList all = ClientesModel.listAllArray(con);
+
+        do{
+            cont = 1;
+            Iterator<Clientes> it = all.iterator();
+
+            while (it.hasNext()) {
+                System.out.print(cont + " -- ");
+                System.out.println(it.next().getNome());
+                cont++;
+            }
+            System.out.println("Sua opção: ");
+            Scanner input = new Scanner(System.in);
+            op = input.nextInt();
+        }while(op == 0 || op > all.size());
+
+        Clientes c = (Clientes) all.get(op - 1);
+        return c.getCodCliente();
     }
 }

@@ -59,22 +59,10 @@ public class Main {
                         new KitsController().listarKits(con);
                         break;
                     case 10:
-                        new VendaController().listarVendas(con);
+                        menuVenda(con);
                         break;
                     case 11:
-                        new VendaController().listarFormaPagamento(con);
-                        break;
-                    case 12:
-                        new VendaController().listarVendasClientesPorTipo(con);
-                        break;
-                    case 13:
-                        new CompraController().createCompra(con);
-                        break;
-                    case 14:
-                        new CompraController().listarCompras(con);
-                        break;
-                    case 15:
-                        new CompraController().listarProdutosMaisComprados(con);
+                        menuCompra(con);
                         break;
                     default:
                         break;
@@ -83,10 +71,9 @@ public class Main {
                 System.out.println(ex.getMessage());
                 continue;
             }
-        }while(op>0 && op < 16);
+        }while(op>0 && op < 12);
         con.close();
     }
-
 
     public static int menu(){
         System.out.println("Informe o número da opção que deseja executar:");
@@ -99,12 +86,9 @@ public class Main {
         System.out.println("7 -- Listar todos os fornecedores");
         System.out.println("8 -- Inserir um novo kit");
         System.out.println("9 -- Listar todos os kits");
-        System.out.println("10 -- Listar todas as Vendas");
-        System.out.println("11 -- Listar as Formas de Pagamentos");
-        System.out.println("12 -- Listar as Vendas por tipo de Cliente");
-        System.out.println("13 -- Inserir Compra");
-        System.out.println("14 -- Listar todas as Compras");
-        System.out.println("15 -- Lista dos Produtos mais Comprados");
+        System.out.println("10 -- Venda");
+        System.out.println("11 -- Compra");
+        System.out.println("12 -- Sair");
         System.out.println("Sua opção: ");
         return input.nextInt();
     }
@@ -165,6 +149,92 @@ public class Main {
                 continue;
             }
         }while(op>0 && op < 9);
+    }
+
+    public static int opcoesVenda(){
+        System.out.println("Venda: ");
+        System.out.println("Informe o número da opção que deseja executar: ");
+        System.out.println("1 -- Inserir Vendas");
+        System.out.println("2 --  Listar todas as Vendas");
+        System.out.println("3 -- Listar as Formas de Pagamentos");
+        System.out.println("4 -- Listar as Vendas por tipo de Cliente");
+        System.out.println("5 -- Sair");
+        System.out.println("Sua opção: ");
+        return input.nextInt();
+    }
+
+    public static void menuVenda(Connection con){
+        int op = 0;
+
+        do{
+            op = opcoesVenda();
+
+            try{
+                switch (op) {
+                    case 1:
+                        new VendaController().createVenda(con);
+                        break;
+                    case 2:
+                        new VendaController().listarVendas(con);
+                        break;
+                    case 3:
+                        new VendaController().listarFormaPagamento(con);
+                        break;
+                    case 4:
+                        new VendaController().listarVendasClientesPorTipo(con);
+                        break;
+                    default:
+                        break;
+                }
+                
+            }catch(SQLException ex){
+                System.out.println(ex.getMessage());
+                continue;
+            }
+        }while(op>0 && op<5);
+    }
+
+    public static int opcoesCompra(){
+        System.out.println("Compra: ");
+        System.out.println("Informe o número da opção que deseja executar: ");
+        System.out.println("1 -- Inserir Compra");
+        System.out.println("2 -- Listar todas as Compras");
+        System.out.println("3 -- Listar os Produtos mais Comprados");
+        System.out.println("4 -- Listar os Produtos com Datasheet");
+        System.out.println("5 -- Sair");
+        System.out.println("Sua opção: ");
+        return input.nextInt();
+    }
+
+    public static void menuCompra(Connection con){
+        int op = 0;
+
+        do{
+            op = opcoesCompra();
+            
+            try{
+                switch (op) {
+                    case 1:
+                        new CompraController().createCompra(con);
+                        break;
+                    case 2:
+                        new CompraController().listarCompras(con);
+                        break;
+                    case 3:
+                        new CompraController().listarProdutosMaisComprados(con);
+                        break;
+                    case 4:
+                        new CompraController().QuantidadeProdutosCompradosComDatasheet(con);
+                        break;
+                    default:
+                        break;
+                }
+
+            }catch(SQLException ex){
+                System.out.println(ex.getMessage());
+                continue;
+            }
+        }while(op>0 && op<5);
     }
     
 }

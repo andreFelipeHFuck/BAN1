@@ -25,7 +25,7 @@ WHERE tipo=1;
 -- JOIN
 -- Saber o nome, cep do produto das pessoas fisica que compraram  determinado produto em um dos quatro trimestre
 -- de um determinado ano
-SELECT DISTINCT c.nome, c.cep
+SELECT DISTINCT c.codCliente, c.nome, c.datanascimento, c.sexo, c.email, c.telefone, c.rua, c.bairro, c.cep, c.cpf
 FROM clientes c JOIN venda v ON c.codcliente=v.codcliente
 WHERE tipo=1 AND 
 DATE_PART('MONTH', v.data) >= 10 AND DATE_PART('MONTH', v.data) <= 12
@@ -55,11 +55,11 @@ WHERE tipo=2;
 -- A consulta deve mostrar o nome da empresa, cnpj, cep, também deve mostrar quantidade de produtos 
 -- já comprados e o dinheiro que essas empresas gastaram na loja
 
-SELECT c.nome, c.cnpj, c.cep, COUNT(*) as qtdProdutosVendidos, SUM(v.quantidade * p.precounitvenda) as valor
+SELECT c.codCliente, c.nome, c.email, c.telefone, c.rua, c.bairro, c.cep, c.cnpj, COUNT(*) as qtdProdutosVendidos, SUM(v.quantidade * p.precounitvenda) as valor
 FROM clientes c JOIN venda v ON c.codcliente=v.codcliente
 JOIN produtos p ON p.codproduto=v.codproduto
 WHERE c.tipo = 2
-GROUP BY c.cnpj, c.nome, c.cep
+GROUP BY c.codCliente, c.nome, c.email, c.telefone, c.rua, c.bairro, c.cep, c.cnpj
 ORDER BY valor DESC, qtdProdutosVendidos;
 
 -- Subconsulta
@@ -68,7 +68,7 @@ ORDER BY valor DESC, qtdProdutosVendidos;
 -- segundo semestre apenas comprou 35. Caso isso ocorra mostre o nome, cnpj, telefone, o número de produtos comprados nos
 -- dois semestres. Não mostre a pessoa jurídica caso a compra com menor número tenha um valor superior a de maior número
 
-SELECT nome, cnpj, telefone FROM clientes c
+SELECT c.codCliente, c.nome, c.email, c.telefone, c.rua, c.bairro, c.cep, c.cnpj FROM clientes c
 WHERE tipo=2
 AND (SELECT SUM(quantidade) FROM venda 
 	  WHERE c.codcliente=codcliente AND DATE_PART('MONTH', data)>=4 AND DATE_PART('MONTH', data)<=6 AND DATE_PART('YEAR', data) = 2023)
@@ -207,3 +207,9 @@ SELECT p.nome, c.quantidade, p.precounitcompra FROM produtos p JOIN compra c ON 
 ORDER BY p.precounitcompra DESC
 
 -- Subconsulta
+-- Pesquisar a quantidade de produtos comprados que não precisa de um datasheet
+
+SELECT codproduto, SUM(quantidade) as quantidade 
+FROM compra
+WHERE codproduto IN (SELECT codproduto FROM produtos WHERE datasheet IS NOT NULL)
+GROUP BY codproduto;

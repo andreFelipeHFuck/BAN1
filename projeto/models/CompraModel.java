@@ -9,6 +9,7 @@ import java.util.HashSet;
 
 import projeto.dados.Compra;
 import projeto.dados.MaisComprado;
+import projeto.dados.ProdutosQuantidade;
 
 public class CompraModel {
     
@@ -70,6 +71,29 @@ public class CompraModel {
                 );
             }
 
+            return list;
+    }
+
+    public static HashSet listQuantidadeProdutosCompradosComDatasheet(Connection con) throws SQLException{
+        Statement st;
+        HashSet list = new HashSet();
+
+            st = con.createStatement();
+            String sql = "SELECT c.codproduto, p.nome, SUM(c.quantidade) as quantidade " + 
+                          "FROM compra c JOIN produtos p ON c.codproduto = p.codproduto " +
+                          "WHERE c.codproduto IN (SELECT codproduto FROM produtos WHERE datasheet IS NOT NULL) " +
+                          "GROUP BY c.codproduto, p.nome";
+            ResultSet result = st.executeQuery(sql);
+
+            while (result.next()) {
+                list.add(
+                    new ProdutosQuantidade(
+                        result.getInt(1),
+                        result.getString(2),
+                       result.getInt(3))
+                );
+            }
+            
             return list;
     }
 }
