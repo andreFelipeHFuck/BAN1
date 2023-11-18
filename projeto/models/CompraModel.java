@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.HashSet;
 
 import projeto.dados.Compra;
+import projeto.dados.MaisComprado;
 
 public class CompraModel {
     
@@ -45,6 +46,27 @@ public class CompraModel {
                         result.getInt(5),
                         result.getDate(6)
                     )
+                );
+            }
+
+            return list;
+    }
+
+    public static HashSet listProdutosMaisComprados(Connection con) throws SQLException{
+        Statement st;
+        HashSet list = new HashSet();
+
+            st = con.createStatement();
+            String sql = "SELECT p.nome, c.quantidade, p.precounitcompra FROM produtos p JOIN compra c ON p.codproduto=c.codproduto " +
+                         "ORDER BY p.precounitcompra DESC";
+            ResultSet result = st.executeQuery(sql);
+
+            while (result.next()) {
+                list.add(
+                    new MaisComprado(
+                        result.getString(1), 
+                        result.getInt(2), 
+                        result.getFloat(3))
                 );
             }
 

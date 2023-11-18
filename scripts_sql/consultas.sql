@@ -154,6 +154,15 @@ VALUES(3, 1, 1000, 'pix', 2, '2023-12-11');
 -- Listar
 SELECT codvenda, codcliente, codproduto, quantidade, formapagamento, codtransportadora, data FROM venda;
 
+-- Mostrar cliente pelo codCliente
+SELECT nome, email, tipo FROM clientes WHERE codcliente=1;
+
+-- Mostrar produto pelo codProduto
+SELECT nome FROM produtos WHERE codproduto=1;
+
+-- Mostrar transportadora 
+SELECT nome FROM transportadora WHERE codtransportadora=1;
+
 -- JOIN
 -- Mostrar quantos pessoas compraram produtos com determinada forma de pagamento
 SELECT formapagamento, COUNT(*) 
@@ -163,22 +172,22 @@ GROUP BY formapagamento;
 -- Faça uma consulta SQL que devolva o preço total da compra feita por um cliente, calcule o preço total dos produtos comprados
 -- (aplique o desconto caso a compra seja no Pix) mais o preço total do frete (km * custoKm). Mostre o preço do produto,
 -- preço do frete e o preço total da compra.
-SELECT (p.precounitcompra * v.quantidade) as precoProduto, (10 * t.custokm) as frete,
+SELECT p.codproduto, v.codvenda, (p.precounitcompra * v.quantidade) as precoProduto, (10 * t.custokm) as frete,
 (p.precounitcompra * v.quantidade) + (10 * t.custokm) as precoTotal, v.formapagamento
 FROM produtos p JOIN venda v ON p.codproduto=v.codproduto
 JOIN transportadora t ON v.codtransportadora = t.codtransportadora
 WHERE v.formapagamento='pix'
 UNION
-SELECT 0.9 * (p.precounitcompra * v.quantidade) as precoProduto, (10 * t.custokm) as frete, 
+SELECT p.codproduto, v.codvenda, 0.9 * (p.precounitcompra * v.quantidade) as precoProduto, (10 * t.custokm) as frete, 
 0.9*(p.precounitcompra * v.quantidade) + (10 * t.custokm) as precoTotal, v.formapagamento
 FROM produtos p JOIN venda v ON p.codproduto=v.codproduto
 JOIN transportadora t ON v.codtransportadora = t.codtransportadora
 WHERE v.formapagamento!='pix';
 
 -- Subconsulta
--- Faça uma pesquisa SQL que devolva todas as pessoas juridica que fizeram compras na loja
+-- Todas as vendas feitas para pessoas juridicas
 SELECT * FROM venda WHERE 
-codcliente IN (SELECT codcliente FROM clientes WHERE tipo=2);
+codcliente IN (SELECT codcliente FROM clientes WHERE tipo=1);
 
 
 -- Compra:
@@ -189,9 +198,12 @@ VALUES(1, 1, 1000, 3, '2023-12-25');
 -- Listar
 SELECT codcompra, codfornecedor, codproduto, quantidade, codtransportadora, data FROM compra;
 
+-- Fornecedor
+SELECT nome FROM fornecedor WHERE codfornecedor=1;
+
 -- JOIN 
--- Solicitar o nome dos produtos mais comprados, ordene pelo preço
-SELECT p.descricao FROM produtos p JOIN compra c ON p.codproduto=c.codproduto
-ORDER BY p.precounitcompra
+-- Solicitar o nome, e quantidade dos produtos mais comprados, ordene pelo preço
+SELECT p.nome, c.quantidade, p.precounitcompra FROM produtos p JOIN compra c ON p.codproduto=c.codproduto
+ORDER BY p.precounitcompra DESC
 
 -- Subconsulta

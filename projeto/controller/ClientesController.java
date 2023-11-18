@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class ClientesController {
     
-    public void createCliente(Connection con) throws SQLException{
+    public static void createCliente(Connection con) throws SQLException{
         Scanner input = new Scanner(System.in);
         System.out.println("Insira os seguintes dados para criar um novo cliente:");
         System.out.println("email:");
@@ -32,11 +32,16 @@ public class ClientesController {
         ClientesModel.create(cliente, con);
         System.out.println("Cliente criado com sucesso!!");
     }
-    public void listarClientes(Connection con) throws SQLException{
+
+    public static void listarClientes(Connection con) throws SQLException{
         HashSet<Clientes> all = ClientesModel.listAll(con);
         Iterator<Clientes> it = all.iterator();
         while(it.hasNext()){
             System.out.println(it.next().toString());
         }
+    }
+
+    public static int listarClientesEnumerados() throws SQLException{
+        
     }
 }

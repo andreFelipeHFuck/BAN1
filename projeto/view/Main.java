@@ -14,9 +14,11 @@ import projeto.controller.ProdutosController;
 import projeto.controller.FornecedorController;
 import projeto.controller.KitsController;
 import projeto.controller.VendaController;
+import projeto.controller.CompraController;
 import projeto.models.Conexao;
 
 public class Main {
+    private static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) throws SQLException{
         
@@ -65,6 +67,15 @@ public class Main {
                     case 12:
                         new VendaController().listarVendasClientesPorTipo(con);
                         break;
+                    case 13:
+                        new CompraController().createCompra(con);
+                        break;
+                    case 14:
+                        new CompraController().listarCompras(con);
+                        break;
+                    case 15:
+                        new CompraController().listarProdutosMaisComprados(con);
+                        break;
                     default:
                         break;
                 }
@@ -72,7 +83,7 @@ public class Main {
                 System.out.println(ex.getMessage());
                 continue;
             }
-        }while(op>0 && op < 13);
+        }while(op>0 && op < 16);
         con.close();
     }
 
@@ -91,8 +102,10 @@ public class Main {
         System.out.println("10 -- Listar todas as Vendas");
         System.out.println("11 -- Listar as Formas de Pagamentos");
         System.out.println("12 -- Listar as Vendas por tipo de Cliente");
+        System.out.println("13 -- Inserir Compra");
+        System.out.println("14 -- Listar todas as Compras");
+        System.out.println("15 -- Lista dos Produtos mais Comprados");
         System.out.println("Sua opção: ");
-        Scanner input = new Scanner(System.in);
         return input.nextInt();
     }
 
@@ -109,7 +122,6 @@ public class Main {
         System.out.println("8 -- Listar Pessoas Jurídicas que compraram menos produtos do que no Trimestre anterior");
         System.out.println("9 -- Sair");
         System.out.println("Sua opção: ");
-        Scanner input = new Scanner(System.in);
         return input.nextInt();
     }
 
@@ -128,7 +140,7 @@ public class Main {
                         new PessoaFisicaController().listarPessoaFisica(con);
                         break;
                     case 3:
-                        new PessoaFisicaController().listarPessoaFisicaComprouSemestre(con);
+                        new PessoaFisicaController().listarPessoaFisicaComprouTrimestre(con);
                         break;
                     case 4:
                         new PessoaFisicaController().numPessoasFisicasCompraramTodosOsProdutos(con);

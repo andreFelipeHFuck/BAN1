@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.sql.Date;
 
 import projeto.dados.PessoaJuridica;
+import projeto.dados.PrincipaisPessoasJuridicas;
 import projeto.models.PessoaJuridicaModel;
 import projeto.controller.TrimestreController;
 
@@ -51,22 +52,48 @@ public class PessoaJuridicaController {
 
     public static void listarPessoaJuridica(Connection con) throws SQLException{
         HashSet all = PessoaJuridicaModel.listAll(con);
-        Iterator<PessoaJuridica> it = all.iterator();
 
-        while (it.hasNext()) {
-            System.out.println(it.next().toString());
+        System.out.println();
+        System.out.println("Lista de Pessoas Jurídicas:");
+        System.out.println();
+
+        if(all.size() == 0){
+            System.out.println("Nenhuma Pesso Jurídica encontrada");
             System.out.println();
-        }
+        }else{
+            Iterator<PessoaJuridica> it = all.iterator();
+
+            while (it.hasNext()) {
+                System.out.println(it.next().toString());
+                System.out.println();
+            }
+
+            System.out.println();
+        }        
     }
 
     public static void listarPessoasJuridicasPrincipais(Connection con) throws SQLException{
         HashSet all = PessoaJuridicaModel.listPessoasJuridicasPrincipais(con);
-        Iterator<PessoaJuridica> it = all.iterator();
 
-        while (it.hasNext()) {
-            System.out.println(it.next().toString());
+        System.out.println();
+        System.out.println("Lista das princiapais Pessoas Jurídicas:");
+        System.out.println("As Pessoas Jurídicas que mais compraram em quantidade e valor na loja.");
+        System.out.println("A lista está ordenada pelo maior valor gasto");
+        System.out.println();
+
+        if(all.size() == 0){
+            System.out.println("Nenhuma Pesso Jurídica encontrada");
             System.out.println();
-        }
+        }else{
+            Iterator<PrincipaisPessoasJuridicas> it = all.iterator();
+
+            while (it.hasNext()) {
+                System.out.println(it.next().toString());
+                System.out.println();
+            }
+
+            System.out.println();
+        } 
     }
 
     public static void listarPessoasJuridicasCompraramMenosTrimestre(Connection con) throws SQLException{
@@ -90,8 +117,6 @@ public class PessoaJuridicaController {
         if(all.size() == 0){
             System.out.println("Nenhuma Pessoa Jurídica encontrada");
         }else{
-
-
             Iterator<PessoaJuridica> it = all.iterator();
 
             System.out.println();

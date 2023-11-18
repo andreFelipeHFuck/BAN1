@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.Iterator;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.sql.Date;
 
@@ -44,5 +45,29 @@ public class TransportadoraController {
             System.out.println(it.next().toString());
             System.out.println();
         }
+    }
+
+    public static int listarTransportadoraEnumera(Connection con) throws SQLException{
+        int cont;
+        int op = 0;
+
+        ArrayList all = TransportadoraModel.listAllArray(con);
+
+        do{
+            cont = 1;
+            Iterator<Transportadora> it = all.iterator();
+
+            while (it.hasNext()) {
+                System.out.print(cont + " -- ");
+                System.out.println(it.next().getNome());
+                cont++;
+            }
+            System.out.println("Sua opção: ");
+            Scanner input = new Scanner(System.in);
+            op = input.nextInt();
+        }while(op == 0 || op > all.size());
+
+        Transportadora t = (Transportadora) all.get(op - 1);
+        return t.getCodTransportadora();
     }
 }

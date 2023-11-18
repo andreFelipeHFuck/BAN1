@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import projeto.dados.Transportadora;
@@ -25,6 +26,27 @@ public class TransportadoraModel {
 public static HashSet<Transportadora> listAll(Connection con) throws SQLException{
     Statement st;
     HashSet<Transportadora> list = new HashSet();
+    st = con.createStatement();
+    String sql = "SELECT codTransportadora, nome, cnpj, email, custokm FROM transportadora";
+    ResultSet result = st.executeQuery(sql);
+    while (result.next()) {
+        list.add(
+            new Transportadora(
+                result.getInt(1),
+                result.getString(2),
+                result.getString(3),
+                result.getString(4),
+                result.getFloat(5)
+            )
+        );
+    }
+
+    return list;
+}
+
+public static ArrayList<Transportadora> listAllArray(Connection con) throws SQLException{
+    Statement st;
+    ArrayList<Transportadora> list = new ArrayList();
     st = con.createStatement();
     String sql = "SELECT codTransportadora, nome, cnpj, email, custokm FROM transportadora";
     ResultSet result = st.executeQuery(sql);

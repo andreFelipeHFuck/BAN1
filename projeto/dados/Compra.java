@@ -19,10 +19,6 @@ public class Compra {
         this.data = data;
     }
 
-    public Compra(){
-
-    }
-
     public int getCodCompra() {
         return codCompra;
     }

@@ -62,17 +62,28 @@ public class PessoaFisicaController {
 
     public static void listarPessoaFisica(Connection con) throws SQLException{
         HashSet all = PessoaFisicaModel.listAll(con);
-        Iterator<PessoaFisica> it = all.iterator();
+       
 
-        while (it.hasNext()) {
-            System.out.println(it.next().toString());
+        System.out.println();
+        System.out.println("Lista de Pessoas Fisícas:");
+        System.out.println();
+
+        if(all.size() == 0){
+            System.out.println("Nenhuma Pessoa Fisíca encontrada");
+            System.out.println();
+        }else{
+            Iterator<PessoaFisica> it = all.iterator();
+
+            while (it.hasNext()) {
+                System.out.println(it.next().toString());
+                System.out.println();
+            }
+
             System.out.println();
         }
     }   
 
-
-
-    public static void listarPessoaFisicaComprouSemestre(Connection con) throws SQLException{
+    public static void listarPessoaFisicaComprouTrimestre(Connection con) throws SQLException{
          Scanner input = new Scanner(System.in);
 
         System.out.println();
@@ -83,19 +94,29 @@ public class PessoaFisicaController {
 
         TrimestreController tri = new TrimestreController();
         int op = 0;
-        while (op < 1 && op > 5) {
+        do{
             op = tri.menuTrimestre();
-        }
+        }while(op == 0 || op > 5);
         int t = tri.getTrimestre(op);
 
-        HashSet all = PessoaFisicaModel.listPessoasFisicasCompraramProdutosSemestre(t, ano, con);
-        Iterator<PessoaFisica> it = all.iterator();
+        HashSet all = PessoaFisicaModel.listPessoasFisicasCompraramProdutosTrimestre(t, ano, con);
 
-        while (it.hasNext()) {
-            System.out.println(it.next().toString());
+        System.out.println();
+        System.out.println("Lista de todas as Pessoas Fisícas que compraram no " + op + "° Trimestre:");
+        System.out.println();
+
+        if(all.size() == 0){
+            System.out.println("Nenhum cliente encontrado");
+            System.out.println();
+        }else{
+            Iterator<PessoaFisica> it = all.iterator();
+
+            while (it.hasNext()) {
+                System.out.println(it.next().toString());
+                System.out.println();
+            }
             System.out.println();
         }
-        
     }
 
     public static void numPessoasFisicasCompraramTodosOsProdutos(Connection con) throws SQLException{

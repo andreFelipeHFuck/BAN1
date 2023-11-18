@@ -66,22 +66,32 @@ public class PessoaFisicaModel {
         return list;
     }
 
-    public static HashSet listPessoasFisicasCompraramProdutosSemestre(int tri, int ano, Connection con) throws SQLException{
+    public static HashSet listPessoasFisicasCompraramProdutosTrimestre(int tri, int ano, Connection con) throws SQLException{
         Statement st;
         HashSet list = new HashSet();
 
             st = con.createStatement();
-            String sql = "SELECT DISTINCT c.nome, c.cep FROM clientes c JOIN venda v ON c.codcliente=v.codcliente WHERE tipo=1 AND  DATE_PART('MONTH', v.data) >=" + 
-                         tri + " AND DATE_PART('MONTH', v.data) <=" + (tri+2) +
-                         " AND DATE_PART('YEAR', v.data) =" + ano;
+            String sql = "SELECT DISTINCT c.codCliente, c.nome, c.datanascimento, c.sexo, c.email, c.telefone, c.rua, c.bairro, c.cep, c.cpf " +
+                         "FROM clientes c JOIN venda v ON c.codcliente=v.codcliente WHERE tipo=1 AND  DATE_PART('MONTH', v.data) >= " + 
+                         tri + " AND DATE_PART('MONTH', v.data) <= " + (tri+2) +
+                         " AND DATE_PART('YEAR', v.data) = " + ano;
 
             ResultSet result = st.executeQuery(sql);
 
             while (result.next()) {
                 list.add(
                     new PessoaFisica(
-                        result.getString(1),
-                        result.getInt(2)
+                        result.getInt(1), 
+                        1, 
+                        result.getString(2), 
+                        result.getDate(3), 
+                        result.getString(4), 
+                        result.getString(5), 
+                        result.getString(6), 
+                        result.getString(7), 
+                        result.getString(8),
+                        result.getInt(9), 
+                        result.getString(10)
                     )
                 );
             }

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import projeto.dados.Produtos;
@@ -28,6 +29,25 @@ public class ProdutosModel {
     public static HashSet<Produtos> listAll(Connection con) throws SQLException {
         Statement st;
         HashSet<Produtos> list = new HashSet();
+        st = con.createStatement();
+        String sql = "SELECT codProduto, precoUnitVenda, precoUnitCompra, descricao, quantidade, nome, datasheet FROM produtos";
+        ResultSet result = st.executeQuery(sql);
+        while (result.next()) {
+            list.add(new Produtos(
+                    result.getInt(1),
+                    result.getFloat(2),
+                    result.getFloat(3),
+                    result.getString(4),
+                    result.getInt(5),
+                    result.getString(6),
+                    result.getString(7)));
+        }
+        return list;
+    }
+
+    public static ArrayList<Produtos> listAllArray(Connection con) throws SQLException {
+        Statement st;
+        ArrayList<Produtos> list = new ArrayList();
         st = con.createStatement();
         String sql = "SELECT codProduto, precoUnitVenda, precoUnitCompra, descricao, quantidade, nome, datasheet FROM produtos";
         ResultSet result = st.executeQuery(sql);

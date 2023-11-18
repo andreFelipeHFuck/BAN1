@@ -23,8 +23,6 @@ public class VendaController {
     public void printVenda(Venda v, Connection con) throws SQLException{
         System.out.println("Codigo Venda: " + v.getCodVenda());
 
-        System.out.println(v.getCodCliente());
-
         Clientes c = ClientesModel.getCliente(v.getCodCliente(), con);
         System.out.println(c);
 

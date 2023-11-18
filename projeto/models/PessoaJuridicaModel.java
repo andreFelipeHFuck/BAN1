@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.HashSet;
 
 import projeto.dados.PessoaJuridica;
+import projeto.dados.PrincipaisPessoasJuridicas;
 
 public class PessoaJuridicaModel {
     public static void create(PessoaJuridica p, Connection con) throws SQLException{
@@ -61,20 +62,32 @@ public class PessoaJuridicaModel {
         HashSet list = new HashSet();
 
             st = con.createStatement();
-            String sql = "SELECT c.nome, c.cnpj, c.cep, COUNT(*) as qtdProdutosVendidos, SUM(v.quantidade * p.precounitvenda) as valor " +
+            String sql = "SELECT c.codCliente, c.nome, c.email, c.telefone, c.rua, c.bairro, c.cep, c.cnpj, " + 
+                         "COUNT(*) as qtdProdutosVendidos, SUM(v.quantidade * p.precounitvenda) as valor " +
                          "FROM clientes c JOIN venda v ON c.codcliente=v.codcliente " + 
                          "JOIN produtos p ON p.codproduto=v.codproduto " +
                          "WHERE c.tipo = 2 " +
-                         "GROUP BY c.cnpj, c.nome, c.cep " +
+                         "GROUP BY c.codCliente, c.nome, c.email, c.telefone, c.rua, c.bairro, c.cep, c.cnpj " +
                          "ORDER BY valor DESC, qtdProdutosVendidos";
 
-            ResultSet reseult = st.executeQuery(sql);
-            while (reseult.next()) {
+            ResultSet result = st.executeQuery(sql);
+
+            while (result.next()) {
                 list.add(
-                    new PessoaJuridica(
-                        reseult.getString(1),
-                        reseult.getString(2),
-                        reseult.getInt(3)
+                    new PrincipaisPessoasJuridicas(
+                        new PessoaJuridica(
+                                result.getInt(1),
+                                2, 
+                                result.getString(2), 
+                                result.getString(3), 
+                                result.getString(4), 
+                                result.getString(5), 
+                                result.getString(6),
+                                result.getInt(7), 
+                                result.getString(8)
+                        ),
+                        result.getInt(9),
+                        result.getFloat(10)
                     )
                 );
             }
@@ -99,7 +112,7 @@ public class PessoaJuridicaModel {
         HashSet list = new HashSet();
 
             st = con.createStatement();
-            String sql = "SELECT nome, cnpj, telefone FROM clientes c " +
+            String sql = "SELECT c.codCliente, c.nome, c.email, c.telefone, c.rua, c.bairro, c.cep, c.cnpj FROM clientes c " +
                          "WHERE tipo=2 " + 
                          "AND (SELECT SUM(quantidade) FROM venda " +
 	                     "WHERE c.codcliente=codcliente AND DATE_PART('MONTH', data)>=" + tri_anterior + " AND DATE_PART('MONTH', data)<= " + (tri_anterior+2) + " AND DATE_PART('YEAR', data) =" + tri_anterior_ano + " ) " +
@@ -111,10 +124,16 @@ public class PessoaJuridicaModel {
 
             while (result.next()) {
                 list.add(
-                    new PessoaJuridica(
-                        result.getString(1),
-                        result.getString(2),
-                        result.getString(3)
+                     new PessoaJuridica(
+                         result.getInt(1),
+                         2, 
+                         result.getString(2), 
+                         result.getString(3), 
+                         result.getString(4), 
+                         result.getString(5), 
+                         result.getString(6),
+                         result.getInt(7), 
+                         result.getString(8)
                     )
                 );
             }
