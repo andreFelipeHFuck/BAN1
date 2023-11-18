@@ -46,10 +46,10 @@ public class Kits {
         this.nome = nome;
     }
     public String toString() {
-        return  "codKit: " + codKit + '\n' +
-                "codKitProduto: " + codKitProduto + '\n' +
-                "codProduto: " + codProduto + '\n' +
-                "quantidadeProduto: " + quantidadeProduto + '\n' +
-                "nome: " + nome;
+        return  "Codigo do Kit: " + codKit + '\n' +
+                "Codigo KitProduto: " + codKitProduto + '\n' +
+                "Codigo do Produto: " + codProduto + '\n' +
+                "Quantidade do produto: " + quantidadeProduto + '\n' +
+                "Nome do Kit: " + nome;
     }
 }

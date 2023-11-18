@@ -62,13 +62,13 @@ public class Produtos {
         this.nome = nome;
     }
     public String toString() {
-        return "codProduto:" + codProduto + '\n' + 
-                "nome:" + nome + '\n' +
-                "precoUnitVenda:" + precoUnitVenda + '\n' +
-                "precoUnitCompra:" + precoUnitCompra + '\n' +
-                "descricao:" + descricao + '\n' +
-                "quantidade:" + quantidade + '\n' +
-                "datasheet:" + datasheet;
+        return "Codigo Produto: " + codProduto + '\n' + 
+                "Nome: " + nome + '\n' +
+                "Preco unitario de venda: " + precoUnitVenda + '\n' +
+                "Preco unitario de compra: " + precoUnitCompra + '\n' +
+                "Descricao: " + descricao + '\n' +
+                "Quantidade: " + quantidade + '\n' +
+                "Datasheet: " + datasheet;
                 
     } 
 }

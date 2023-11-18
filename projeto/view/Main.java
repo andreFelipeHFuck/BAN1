@@ -47,23 +47,22 @@ public class Main {
                         new ProdutosController().listarProdutos(con);
                         break;
                     case 6:
-                        new FornecedorController().createFornecedor(con);
-                        break;
-                    case 7:
-                        new FornecedorController().listarFornecedores(con);
-                        break;
-                    case 8:
                         new KitsController().createKit(con);
                         break;
-                    case 9:
+                    case 7:
                         new KitsController().listarKits(con);
                         break;
-                    case 10:
+                    case 8:
                         menuVenda(con);
                         break;
-                    case 11:
+                    case 9:
                         menuCompra(con);
                         break;
+                    case 10:
+                        menuFornecedor(con);
+                        break;
+                    case 11:
+                        menuKits(con);
                     default:
                         break;
                 }
@@ -71,7 +70,7 @@ public class Main {
                 System.out.println(ex.getMessage());
                 continue;
             }
-        }while(op>0 && op < 12);
+        }while(op>0 && op < 11);
         con.close();
     }
 
@@ -82,12 +81,12 @@ public class Main {
         System.out.println("3 -- Listar todos as Transportadoras");
         System.out.println("4 -- Inserir um novo produto");
         System.out.println("5 -- Listar todos os produtos");
-        System.out.println("6 -- Inserir um novo fornecedor");
-        System.out.println("7 -- Listar todos os fornecedores");
-        System.out.println("8 -- Inserir um novo kit");
-        System.out.println("9 -- Listar todos os kits");
-        System.out.println("10 -- Venda");
-        System.out.println("11 -- Compra");
+        System.out.println("6 -- Inserir um novo kit");
+        System.out.println("7 -- Listar todos os kits");
+        System.out.println("8 -- Venda");
+        System.out.println("9 -- Compra");
+        System.out.println("10 -- Fornecedor");
+        System.err.println("11 -- Kits");
         System.out.println("12 -- Sair");
         System.out.println("Sua opção: ");
         return input.nextInt();
@@ -236,5 +235,90 @@ public class Main {
             }
         }while(op>0 && op<5);
     }
-    
+    public static int opcoesFornecedor(){
+        System.out.println("Fornecedor: ");
+        System.out.println("Informe o número da opção que deseja executar: ");
+        System.out.println("1 -- Inserir Fornecedor");
+        System.out.println("2 -- Listar todos os Fornecedores");
+        System.out.println("3 -- Listar as Compras e Fornecedores");
+        System.out.println("4 -- Listar os 3 principais Fornecedores");
+        System.out.println("5 -- Sair");
+        System.out.println("Sua opção: ");
+        return input.nextInt();
+    }
+
+    public static void menuFornecedor(Connection con){
+        int op = 0;
+
+        do{
+            op = opcoesFornecedor();
+            
+            try{
+                switch (op) {
+                    case 1:
+                        new FornecedorController().createFornecedor(con);
+                        break;
+                    case 2:
+                        new FornecedorController().listarFornecedores(con);
+                        break;
+                    case 3:
+                        new FornecedorController().listarComprasFornecedor(con);
+                        break;
+                    case 4:
+                        new FornecedorController().listarFornecedorQuantidade(con);
+                        break;
+                    default:
+                        break;
+                }
+
+            }catch(SQLException ex){
+                System.out.println(ex.getMessage());
+                continue;
+            }
+        }while(op>0 && op<5);
+    }
+
+    public static int opcoesKits(){
+        System.out.println("Kits: ");
+        System.out.println("Informe o número da opção que deseja executar: ");
+        System.out.println("1 -- Inserir Kits");
+        System.out.println("2 -- Listar todos os Kits");
+        System.out.println("3 -- Listar os Kits e informacoes dos Produtos");
+        System.out.println("4 -- Listar a quantidade total de Produtos em Kits");
+        System.out.println("5 -- Sair");
+        System.out.println("Sua opção: ");
+        return input.nextInt();
+    }
+
+    public static void menuKits(Connection con){
+        int op = 0;
+
+        do{
+            op = opcoesKits();
+            
+            try{
+                switch (op) {
+                    case 1:
+                        new KitsController().createKit(con);
+                        break;
+                    case 2:
+                        new KitsController().listarKits(con);
+                        break;
+                    case 3:
+                        new KitsController().listarKitsProdutos(con);
+                        break;
+                    case 4:
+                        new KitsController().listarKitsQuantidades(con);
+                        break;
+                    default:
+                        break;
+                }
+
+            }catch(SQLException ex){
+                System.out.println(ex.getMessage());
+                continue;
+            }
+        }while(op>0 && op<5);
+    }
 }
+

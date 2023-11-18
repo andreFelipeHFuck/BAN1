@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import projeto.dados.Fornecedor;
+import projeto.dados.FornecedorQuantidade;
+import projeto.dados.CompraFornecedor;
 
 public class FornecedorModel {
 
@@ -64,6 +66,45 @@ public class FornecedorModel {
             result.next();
 
             return result.getString(1);
+    }
+
+    public static HashSet<CompraFornecedor> listarComprasFornecedor(Connection con) throws SQLException {
+        Statement st;
+        HashSet<CompraFornecedor> list = new HashSet<>();
+        st = con.createStatement();
+        String sql = "SELECT c.codCompra, c.quantidade, f.nome " +
+                     "FROM Compra c " +
+                     "INNER JOIN Fornecedor f ON c.codFornecedor = f.codFornecedor";
+        ResultSet result = st.executeQuery(sql);
+
+        while (result.next()) {
+            list.add(new CompraFornecedor(
+                    result.getInt(1),
+                    result.getInt(2),
+                    result.getString(3)));
+        }
+        return list;
+    }
+    public static HashSet<FornecedorQuantidade> listarFornecedorQuantidade(Connection con) throws SQLException {
+        Statement st;
+        HashSet<FornecedorQuantidade> list = new HashSet<>();
+        st = con.createStatement();
+        String sql = "SELECT f.nome, t.totalQuantidade " +
+                     "FROM Fornecedor f " +
+                     "INNER JOIN ( " +
+                     "    SELECT codFornecedor, SUM(quantidade) AS totalQuantidade " +
+                     "    FROM Compra c " +
+                     "    GROUP BY codFornecedor " +
+                     ") AS t ON f.codFornecedor = t.codFornecedor " +
+                     "ORDER BY totalQuantidade DESC " +
+                     "LIMIT 3";
+        ResultSet result = st.executeQuery(sql);
+
+        while (result.next()) {
+            list.add(new FornecedorQuantidade(
+                    result.getString(1),
+                    result.getInt(2)));        }
+        return list;
     }
 }
 

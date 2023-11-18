@@ -1,6 +1,8 @@
 package projeto.controller;
 
+import projeto.dados.CompraFornecedor;
 import projeto.dados.Fornecedor;
+import projeto.dados.FornecedorQuantidade;
 import projeto.models.FornecedorModel;
 
 import java.sql.Connection;
@@ -58,5 +60,46 @@ public class FornecedorController {
 
         Fornecedor p = (Fornecedor) all.get(op - 1);
         return p.getCodFornecedor();
+    }
+
+    public static void listarComprasFornecedor(Connection con) throws SQLException {
+        HashSet<CompraFornecedor> all = FornecedorModel.listarComprasFornecedor(con);
+
+        System.out.println();
+        System.out.println("Todas as compras e seus fornecedores:");
+        System.out.println();
+
+        if(all.size() == 0) {
+            System.out.println("Nenhuma compra encontrada");
+            System.out.println();
+        } else {
+            Iterator<CompraFornecedor> it = all.iterator();
+            while (it.hasNext()) {
+                System.out.println(it.next().toString());
+                System.out.println();
+            }
+
+            System.out.println();
+        }
+    }
+    public static void listarFornecedorQuantidade(Connection con) throws SQLException {
+        HashSet<FornecedorQuantidade> all = FornecedorModel.listarFornecedorQuantidade(con);
+
+        System.out.println();
+        System.out.println("Os 3 principais fornecedores:");
+        System.out.println();
+
+        if(all.size() == 0) {
+            System.out.println("Nenhuma fornecedor encontrado");
+            System.out.println();
+        } else {
+            Iterator<FornecedorQuantidade> it = all.iterator();
+            while (it.hasNext()) {
+                System.out.println(it.next().toString());
+                System.out.println();
+            }
+
+            System.out.println();
+        }
     }
 }
