@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.Iterator;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.sql.Date;
 
@@ -19,8 +20,11 @@ public class CompraController {
     public static void createCompra(Connection con) throws SQLException{
         Scanner input = new Scanner(System.in);
 
+        System.out.println();
         int codProduto = ProdutosController.listarProdutosEnumerados(con);
+
         int codFornecedor = FornecedorController.listarFornecedoresEnumerados(con);
+
         int codTransportadora = TransportadoraController.listarTransportadoraEnumera(con);
 
         System.out.print("Quantidade\n>");
@@ -28,6 +32,7 @@ public class CompraController {
 
         input.nextLine();
 
+        System.out.println();
         System.out.println("Data da entrega:");
         System.out.print("Dia:\n> ");
         String dia = input.nextLine();
@@ -58,7 +63,7 @@ public class CompraController {
     }
 
     public static void listarCompras(Connection con) throws SQLException{
-        HashSet all = CompraModel.listAll(con);
+        ArrayList all = CompraModel.listAll(con);
 
         System.out.println();
         System.out.println("Todas as Compras realizadas pela loja:");
@@ -79,7 +84,7 @@ public class CompraController {
     }
 
     public static void listarProdutosMaisComprados(Connection con) throws SQLException{
-        HashSet all = CompraModel.listProdutosMaisComprados(con);
+        ArrayList all = CompraModel.listProdutosMaisComprados(con);
 
         System.out.println();
         System.out.println("Lista dos produtos mais comprados:");
@@ -101,7 +106,7 @@ public class CompraController {
     }
 
     public static void QuantidadeProdutosCompradosComDatasheet(Connection con) throws SQLException{
-        HashSet all = CompraModel.listQuantidadeProdutosCompradosComDatasheet(con);
+        ArrayList all = CompraModel.listQuantidadeProdutosCompradosComDatasheet(con);
 
         System.out.println();
         System.out.println("Lista dos produtos comprados que possuem Datasheet");

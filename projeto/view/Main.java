@@ -75,6 +75,7 @@ public class Main {
     }
 
     public static int opcoesCliente(){
+        System.out.println();
         System.out.println("Clientes: ");
         System.out.println("Informe o número da opção que deseja executar: ");
 

@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.Iterator;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.sql.Date;
 
 import projeto.dados.Venda;
@@ -67,7 +67,7 @@ public class VendaController {
     }
 
     public void listarVendas(Connection con) throws SQLException{
-        HashSet all = VendaModel.listAll(con);
+        ArrayList all = VendaModel.listAll(con);
 
         System.out.println();
         System.out.println("Todas as Vendas realizadas pela loja:");
@@ -90,7 +90,7 @@ public class VendaController {
     }
 
     public void listarFormaPagamento(Connection con) throws SQLException{
-        HashSet all = VendaModel.listFormaPagamento(con);
+        ArrayList all = VendaModel.listFormaPagamento(con);
 
         System.out.println();
         System.out.println("Formas de Pagamento:");
@@ -146,7 +146,7 @@ public class VendaController {
         }
 
         System.out.println();
-        HashSet all = VendaModel.listVendasClientesPorTipo(tipo, con);
+        ArrayList all = VendaModel.listVendasClientesPorTipo(tipo, con);
 
         if(all.size() == 0){
             System.out.println("Nenhum Cliente encontrado");

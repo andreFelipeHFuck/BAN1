@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.Iterator;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.sql.Date;
 
@@ -48,7 +49,9 @@ public class PessoaFisicaController {
         String bairro = input.nextLine();
 
         System.out.print("CEP:\n> ");
-        int cep = Integer.parseInt(input.nextLine());
+        int cep = input.nextInt();
+
+        input.nextLine();
 
         System.out.print("CPF:\n> ");
         String cpf = input.nextLine();
@@ -61,7 +64,7 @@ public class PessoaFisicaController {
     }
 
     public static void listarPessoaFisica(Connection con) throws SQLException{
-        HashSet all = PessoaFisicaModel.listAll(con);
+        ArrayList all = PessoaFisicaModel.listAll(con);
        
 
         System.out.println();
@@ -99,7 +102,7 @@ public class PessoaFisicaController {
         }while(op == 0 || op > 5);
         int t = tri.getTrimestre(op);
 
-        HashSet all = PessoaFisicaModel.listPessoasFisicasCompraramProdutosTrimestre(t, ano, con);
+        ArrayList all = PessoaFisicaModel.listPessoasFisicasCompraramProdutosTrimestre(t, ano, con);
 
         System.out.println();
         System.out.println("Lista de todas as Pessoas Fisícas que compraram no " + op + "° Trimestre:");

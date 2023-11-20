@@ -65,6 +65,7 @@ public class TransportadoraController {
 
         ArrayList all = TransportadoraModel.listAllArray(con);
 
+        System.out.println("Transportadora:");
         do{
             cont = 1;
             Iterator<Transportadora> it = all.iterator();
@@ -84,7 +85,7 @@ public class TransportadoraController {
     }
 
     public static void listarTransportadoraQuantidade(Connection con) throws SQLException{
-        HashSet all = TransportadoraModel.listTransportadoraQuantidade(con);
+        ArrayList all = TransportadoraModel.listTransportadoraQuantidade(con);
         Iterator<TransportadoraQuantidade> it = all.iterator();
 
         System.out.println();
@@ -123,7 +124,7 @@ public class TransportadoraController {
 
         int codProduto = ProdutosController.listarProdutosEnumerados(con);
 
-        HashSet<TransportadoraQuantidade> all = TransportadoraModel.listTransportadorasUsadasParaProdutos(codProduto, con);
+        ArrayList<TransportadoraQuantidade> all = TransportadoraModel.listTransportadorasUsadasParaProdutos(codProduto, con);
 
         if(all.size() == 0){
             System.out.println("Nenhuma Transportadora encontrada");

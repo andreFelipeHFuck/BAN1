@@ -7,6 +7,7 @@ import org.postgresql.core.SqlCommand;
 import java.util.Iterator;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.sql.Date;
 
@@ -51,7 +52,7 @@ public class PessoaJuridicaController {
     }
 
     public static void listarPessoaJuridica(Connection con) throws SQLException{
-        HashSet all = PessoaJuridicaModel.listAll(con);
+        ArrayList all = PessoaJuridicaModel.listAll(con);
 
         System.out.println();
         System.out.println("Lista de Pessoas Jurídicas:");
@@ -73,7 +74,7 @@ public class PessoaJuridicaController {
     }
 
     public static void listarPessoasJuridicasPrincipais(Connection con) throws SQLException{
-        HashSet all = PessoaJuridicaModel.listPessoasJuridicasPrincipais(con);
+        ArrayList all = PessoaJuridicaModel.listPessoasJuridicasPrincipais(con);
 
         System.out.println();
         System.out.println("Lista das princiapais Pessoas Jurídicas:");
@@ -112,7 +113,7 @@ public class PessoaJuridicaController {
         }while (op == 0 || op > 4);
         int t = tri1.getTrimestre(op);
 
-        HashSet all = PessoaJuridicaModel.listPessoasJuridicasCompraramMenosTrimestre(t, ano, con);
+        ArrayList all = PessoaJuridicaModel.listPessoasJuridicasCompraramMenosTrimestre(t, ano, con);
 
         if(all.size() == 0){
             System.out.println("Nenhuma Pessoa Jurídica encontrada");

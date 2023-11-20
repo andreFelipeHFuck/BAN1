@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import projeto.dados.Compra;
@@ -29,9 +30,9 @@ public class CompraModel {
     }
 
 
-    public static HashSet listAll(Connection con) throws SQLException {
+    public static ArrayList listAll(Connection con) throws SQLException {
         Statement st;
-        HashSet list = new HashSet();
+        ArrayList list = new ArrayList();
 
             st = con.createStatement();
             String sql = "SELECT codcompra, codfornecedor, codproduto, quantidade, codtransportadora, data FROM compra";
@@ -53,9 +54,9 @@ public class CompraModel {
             return list;
     }
 
-    public static HashSet listProdutosMaisComprados(Connection con) throws SQLException{
+    public static ArrayList listProdutosMaisComprados(Connection con) throws SQLException{
         Statement st;
-        HashSet list = new HashSet();
+        ArrayList list = new ArrayList();
 
             st = con.createStatement();
             String sql = "SELECT p.nome, c.quantidade, p.precounitcompra FROM produtos p JOIN compra c ON p.codproduto=c.codproduto " +
@@ -74,9 +75,9 @@ public class CompraModel {
             return list;
     }
 
-    public static HashSet listQuantidadeProdutosCompradosComDatasheet(Connection con) throws SQLException{
+    public static ArrayList listQuantidadeProdutosCompradosComDatasheet(Connection con) throws SQLException{
         Statement st;
-        HashSet list = new HashSet();
+        ArrayList list = new ArrayList();
 
             st = con.createStatement();
             String sql = "SELECT c.codproduto, p.nome, SUM(c.quantidade) as quantidade " + 

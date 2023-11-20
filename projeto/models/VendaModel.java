@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import projeto.dados.Venda;
@@ -29,9 +30,9 @@ public class VendaModel {
             st.close();
     }
 
-    public static HashSet listAll(Connection con) throws SQLException{
+    public static ArrayList listAll(Connection con) throws SQLException{
         Statement st;
-        HashSet list = new HashSet();
+        ArrayList list = new ArrayList();
 
             st = con.createStatement();
             String sql = "SELECT codvenda, codcliente, codproduto, quantidade, formapagamento, codtransportadora, data FROM venda";
@@ -54,9 +55,9 @@ public class VendaModel {
             return list;
     }
 
-    public static HashSet listFormaPagamento(Connection con) throws SQLException{
+    public static ArrayList listFormaPagamento(Connection con) throws SQLException{
         Statement st;
-        HashSet list = new HashSet();
+        ArrayList list = new ArrayList();
 
             st = con.createStatement();
             String sql = "SELECT formapagamento, COUNT(*) " +
@@ -75,9 +76,9 @@ public class VendaModel {
             return list;
     }
 
-    public static HashSet listVendasClientesPorTipo(int tipo, Connection con) throws SQLException{
+    public static ArrayList listVendasClientesPorTipo(int tipo, Connection con) throws SQLException{
         Statement st;
-        HashSet list = new HashSet();
+        ArrayList list = new ArrayList();
 
             st = con.createStatement();
             String sql = "SELECT codvenda, codcliente, codproduto, quantidade, formapagamento, codtransportadora, data " +

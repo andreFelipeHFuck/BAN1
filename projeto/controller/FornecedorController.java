@@ -30,7 +30,7 @@ public class FornecedorController {
     }
 
     public void listarFornecedores(Connection con) throws SQLException {
-        HashSet<Fornecedor> all = FornecedorModel.listAll(con);
+        ArrayList<Fornecedor> all = FornecedorModel.listAll(con);
         Iterator<Fornecedor> it = all.iterator();
         while(it.hasNext()){
             System.out.println(it.next().toString());
@@ -42,8 +42,9 @@ public class FornecedorController {
         int cont;
         int op = 0;
 
-        ArrayList all = FornecedorModel.listAllArray(con);
+        ArrayList all = FornecedorModel.listAll(con);
 
+        System.out.println("Fornecedor:");
         do{
             cont = 1;
             Iterator<Fornecedor> it = all.iterator();
@@ -63,7 +64,7 @@ public class FornecedorController {
     }
 
     public static void listarComprasFornecedor(Connection con) throws SQLException {
-        HashSet<CompraFornecedor> all = FornecedorModel.listarComprasFornecedor(con);
+        ArrayList<CompraFornecedor> all = FornecedorModel.listarComprasFornecedor(con);
 
         System.out.println();
         System.out.println("Todas as compras e seus fornecedores:");
@@ -83,7 +84,7 @@ public class FornecedorController {
         }
     }
     public static void listarFornecedorQuantidade(Connection con) throws SQLException {
-        HashSet<FornecedorQuantidade> all = FornecedorModel.listarFornecedorQuantidade(con);
+        ArrayList<FornecedorQuantidade> all = FornecedorModel.listarFornecedorQuantidade(con);
 
         System.out.println();
         System.out.println("Os 3 principais fornecedores:");

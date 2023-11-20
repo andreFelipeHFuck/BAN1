@@ -7,6 +7,7 @@ import projeto.models.KitsModel;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -16,21 +17,28 @@ public class KitsController {
     public void createKit(Connection con) throws SQLException{
         Scanner input = new Scanner(System.in);
         System.out.println("Insira os seguintes dados para criar um novo kit:");
-        System.out.println("codigo KitProduto:");
-        int codKitProduto = Integer.parseInt(input.nextLine());
-        System.out.println("codigo do produto:");
-        int codProduto = Integer.parseInt(input.nextLine());
-        System.out.println("quantidade do produto:");
-        int quantidadeProduto = Integer.parseInt(input.nextLine());
-        System.out.println("nome:");
+
+        System.out.print("Nome:\n>");
         String nome = input.nextLine();
+
+        System.out.println("Produto\n>");
+        int codProduto = ProdutosController.listarProdutosEnumerados(con);
+        
+        System.out.println("Produto que acompanha o Kit:");
+        int codKitProduto = ProdutosController.listarProdutosEnumerados(con);
+
+        System.out.print("Quantidade do produto:\n>");
+        int quantidadeProduto = Integer.parseInt(input.nextLine());
+
+        System.out.println();
+
         Kits k = new Kits(0, codKitProduto, codProduto, quantidadeProduto, nome);
         KitsModel.create(k, con);
-        System.out.println("Kit criado com sucesso!!");
+        System.out.println("Kit criado com sucesso!!\n");
     }
 
     public void listarKits(Connection con) throws SQLException{
-        HashSet<Kits> all = KitsModel.listAll(con);
+        ArrayList<Kits> all = KitsModel.listAll(con);
 
         System.out.println();
         System.out.println("Todos os Kits da loja:");
@@ -53,7 +61,7 @@ public class KitsController {
     }
 
     public static void listarKitsProdutos(Connection con) throws SQLException {
-        HashSet<KitsProdutos> all = KitsModel.listarKitsProdutos(con);
+        ArrayList<KitsProdutos> all = KitsModel.listarKitsProdutos(con);
 
         System.out.println();
         System.out.println("Todos os kits e suas informacoes:");
@@ -93,7 +101,7 @@ public class KitsController {
     }
 
     public static void listarKitsQuantidadeDeProdutosComDatasheet(Connection con) throws SQLException{
-        HashSet<KitsQuantidade> all = KitsModel.listKitsQuantidadeDeProdutosComDatasheet(con);
+        ArrayList<KitsQuantidade> all = KitsModel.listKitsQuantidadeDeProdutosComDatasheet(con);
 
         System.out.println();
         System.out.println("Lista da quantidade de Produtos com Datasheet por Kit");

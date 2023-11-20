@@ -12,22 +12,53 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class ProdutosController {
+
+    public int menuDatasheet(){
+        System.out.println();
+        System.out.println("Escolha o tipo de cliente: ");
+        System.out.println("1 -- Possui Datasheet");
+        System.out.println("2 -- Não Possui Datasheet");
+        System.out.println("Sua opção: ");
+        Scanner input = new Scanner(System.in);
+        return input.nextInt();
+    }
+
+    public int temDatasheet(){
+        int op = 0;
+
+        do{
+            op = menuDatasheet();
+        }while(op == 0 || op > 3);
+
+        return op;
+    }
     
     public void createProduto(Connection con) throws SQLException {
         Scanner input = new Scanner(System.in);
         System.out.println("Insira os seguintes dados para criar um novo produto:");
-        System.out.println("precoUnitVenda:");
-        float precoUnitVenda = Float.parseFloat(input.nextLine());
-        System.out.println("precoUnitCompra:");
-        float precoUnitCompra = Float.parseFloat(input.nextLine());
-        System.out.println("descricao:");
-        String descricao = input.nextLine();
-        System.out.println("quantidade:");
-        int quantidade = Integer.parseInt(input.nextLine());
-        System.out.println("nome:");
+        
+        System.out.print("Nome:\n>");
         String nome = input.nextLine();
-        System.out.println("datasheet:");
-        String datasheet = input.nextLine();
+        
+        System.out.print("Descricao:\n>");
+        String descricao = input.nextLine();
+
+        System.out.print("Quantidade:\n>");
+        int quantidade = Integer.parseInt(input.nextLine());
+     
+
+        System.out.print("Preço Unidade Venda:\n>");
+        float precoUnitVenda = Float.parseFloat(input.nextLine());
+
+        System.out.print("Preço Unidade Compra:\n>");
+        float precoUnitCompra = Float.parseFloat(input.nextLine());
+
+        String datasheet = null;
+
+        if(temDatasheet() == 1){
+            System.out.print("Datasheet:\n>");
+            datasheet = input.nextLine();
+        }
 
         Produtos produto = new Produtos(0 , precoUnitVenda, precoUnitCompra, descricao, quantidade, nome, datasheet);
         ProdutosModel.create(produto, con);
@@ -35,7 +66,7 @@ public class ProdutosController {
     }
 
     public void listarProdutos(Connection con) throws SQLException {
-        HashSet all = ProdutosModel.listAll(con);
+        ArrayList all = ProdutosModel.listAll(con);
 
         System.out.println();
         System.out.println("Lista dos Produtos:");
@@ -59,8 +90,9 @@ public class ProdutosController {
         int cont;
         int op =0;
 
-        ArrayList all = ProdutosModel.listAllArray(con);
+        ArrayList all = ProdutosModel.listAll(con);
      
+        System.out.println("Produto:");
         do{
             cont = 1;
             Iterator<Produtos> it = all.iterator();
@@ -80,7 +112,7 @@ public class ProdutosController {
     }
 
     public static void listar10ProdutosMaisLucrativos(Connection con) throws SQLException{
-        HashSet all = ProdutosModel.list10ProdutosMaisLucrativos(con);
+        ArrayList all = ProdutosModel.list10ProdutosMaisLucrativos(con);
 
         System.out.println();
         System.out.println("Lista dos 10 Produtos mais lucrativos:");
@@ -114,7 +146,7 @@ public class ProdutosController {
     }
 
     public static void listarProdutosAcimaDaMedia(Connection con) throws SQLException{
-        HashSet all = ProdutosModel.listProdutosComPrecoAcimaMedia(con);
+        ArrayList all = ProdutosModel.listProdutosComPrecoAcimaMedia(con);
 
         System.out.println();
         System.out.println("Lista Produtos com preço de Venda acima da média:");

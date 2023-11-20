@@ -27,27 +27,7 @@ public class ClientesModel {
         st.close();
     }
 
-    public static HashSet<Clientes> listAll(Connection con) throws SQLException {
-        Statement st;
-        HashSet<Clientes> list = new HashSet<>();
-        st = con.createStatement();
-        String sql = "SELECT codCliente, email, telefone, nome, rua, cep, bairro, tipo FROM Clientes";
-        ResultSet result = st.executeQuery(sql);
-        while (result.next()) {
-            list.add(new Clientes(
-                    result.getInt(1),
-                    result.getString(2),
-                    result.getString(3),
-                    result.getString(4),
-                    result.getString(5),
-                    result.getInt(6),
-                    result.getString(7),
-                    result.getInt(8)));
-        }
-        return list;
-    }
-
-     public static ArrayList<Clientes> listAllArray(Connection con) throws SQLException {
+     public static ArrayList<Clientes> listAll(Connection con) throws SQLException {
         Statement st;
         ArrayList<Clientes> list = new ArrayList();
         st = con.createStatement();

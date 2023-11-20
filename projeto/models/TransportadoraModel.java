@@ -77,9 +77,9 @@ public static String getNomeTransportadora(int codTransportadora, Connection con
     return result.getString(1);
 }
 
-    public static HashSet<TransportadoraQuantidade> listTransportadoraQuantidade(Connection con) throws SQLException{
+    public static ArrayList listTransportadoraQuantidade(Connection con) throws SQLException{
         Statement st;
-        HashSet<TransportadoraQuantidade> list = new HashSet();
+        ArrayList<TransportadoraQuantidade> list = new ArrayList();
 
             st = con.createStatement();
             String sql = "SELECT t.nome, COUNT(*) as numeroDeVezes " +
@@ -117,9 +117,9 @@ public static String getNomeTransportadora(int codTransportadora, Connection con
             return t;
     }
 
-    public static HashSet<TransportadoraQuantidade> listTransportadorasUsadasParaProdutos(int codProduto, Connection con) throws SQLException{
+    public static ArrayList listTransportadorasUsadasParaProdutos(int codProduto, Connection con) throws SQLException{
         Statement st;
-        HashSet<TransportadoraQuantidade> list = new HashSet();
+        ArrayList<TransportadoraQuantidade> list = new ArrayList();
         st = con.createStatement();
 
 

@@ -24,23 +24,7 @@ public class FornecedorModel {
         st.close();
     }
 
-    public static HashSet<Fornecedor> listAll(Connection con) throws SQLException {
-        Statement st;
-        HashSet<Fornecedor> list = new HashSet<>();
-        st = con.createStatement();
-        String sql = "SELECT codFornecedor, nome, cnpj, email FROM Fornecedor";
-        ResultSet result = st.executeQuery(sql);
-        while (result.next()) {
-            list.add(new Fornecedor(
-                    result.getInt(1),
-                    result.getString(2),
-                    result.getString(3),
-                    result.getString(4)));
-        }
-        return list;
-    }
-
-    public static ArrayList<Fornecedor> listAllArray(Connection con) throws SQLException {
+    public static ArrayList listAll(Connection con) throws SQLException {
         Statement st;
         ArrayList<Fornecedor> list = new ArrayList();
         st = con.createStatement();
@@ -56,6 +40,7 @@ public class FornecedorModel {
         return list;
     }
 
+   
     public static String getNomeFornecedor(int codFornecedor, Connection con) throws SQLException{
         Statement st;
         HashSet<Fornecedor> list = new HashSet();
@@ -68,9 +53,9 @@ public class FornecedorModel {
             return result.getString(1);
     }
 
-    public static HashSet<CompraFornecedor> listarComprasFornecedor(Connection con) throws SQLException {
+    public static ArrayList listarComprasFornecedor(Connection con) throws SQLException {
         Statement st;
-        HashSet<CompraFornecedor> list = new HashSet<>();
+        ArrayList<CompraFornecedor> list = new ArrayList<>();
         st = con.createStatement();
         String sql = "SELECT c.codCompra, c.quantidade, f.nome " +
                      "FROM Compra c " +
@@ -85,9 +70,9 @@ public class FornecedorModel {
         }
         return list;
     }
-    public static HashSet<FornecedorQuantidade> listarFornecedorQuantidade(Connection con) throws SQLException {
+    public static  ArrayList listarFornecedorQuantidade(Connection con) throws SQLException {
         Statement st;
-        HashSet<FornecedorQuantidade> list = new HashSet<>();
+        ArrayList<FornecedorQuantidade> list = new ArrayList();
         st = con.createStatement();
         String sql = "SELECT f.nome, t.totalQuantidade " +
                      "FROM Fornecedor f " +

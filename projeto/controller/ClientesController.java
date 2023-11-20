@@ -35,7 +35,7 @@ public class ClientesController {
     }
 
     public static void listarClientes(Connection con) throws SQLException{
-        HashSet<Clientes> all = ClientesModel.listAll(con);
+        ArrayList<Clientes> all = ClientesModel.listAll(con);
 
         System.out.println();
         System.out.println("Lista de todos os Clientes da Loja:");
@@ -59,7 +59,7 @@ public class ClientesController {
         int cont;
         int op = 0;
 
-        ArrayList all = ClientesModel.listAllArray(con);
+        ArrayList all = ClientesModel.listAll(con);
 
         do{
             cont = 1;

@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import projeto.dados.Kits;
@@ -17,17 +18,17 @@ public class KitsModel {
     public static void create(Kits k, Connection con) throws SQLException{
         PreparedStatement st;
         st = con.prepareStatement("INSERT INTO Kits (codKitProduto, codProduto, quantidadeProduto, nome) VALUES (?,?,?,?)");
-        st.setInt(2, k.getCodKitProduto());
-        st.setInt(3, k.getCodProduto());
-        st.setInt(4, k.getQuantidadeProduto());
-        st.setString(5, k.getNome());
+        st.setInt(1, k.getCodKitProduto());
+        st.setInt(2, k.getCodProduto());
+        st.setInt(3, k.getQuantidadeProduto());
+        st.setString(4, k.getNome());
         st.execute();
         st.close();
     }
 
-    public static HashSet<Kits> listAll(Connection con) throws SQLException{
+    public static ArrayList<Kits> listAll(Connection con) throws SQLException{
         Statement st;
-        HashSet<Kits> list = new HashSet<>();
+        ArrayList<Kits> list = new ArrayList();
         st = con.createStatement();
         String sql = "SELECT codKit, codKitProduto, codProduto, quantidadeProduto, nome FROM Kits";
         ResultSet result = st.executeQuery(sql);
@@ -42,9 +43,9 @@ public class KitsModel {
         return list;
     }
 
-    public static HashSet<KitsProdutos> listarKitsProdutos(Connection con) throws SQLException {
+    public static ArrayList<KitsProdutos> listarKitsProdutos(Connection con) throws SQLException {
         Statement st;
-        HashSet<KitsProdutos> list = new HashSet<>();
+        ArrayList<KitsProdutos> list = new ArrayList();
         st = con.createStatement();
         String sql = "SELECT k.nome AS nomeKit, " +
             "       k.quantidadeProduto, " +
@@ -83,9 +84,9 @@ public class KitsModel {
         return list;
     }
 
-    public static HashSet<KitsQuantidade> listKitsQuantidadeDeProdutosComDatasheet(Connection con) throws SQLException{
+    public static ArrayList<KitsQuantidade> listKitsQuantidadeDeProdutosComDatasheet(Connection con) throws SQLException{
         Statement st;
-        HashSet<KitsQuantidade> list = new HashSet<KitsQuantidade>();
+        ArrayList<KitsQuantidade> list = new ArrayList<KitsQuantidade>();
 
             st = con.createStatement();
             String sql = "SELECT codproduto, nome, COUNT(*) FROM kits " +

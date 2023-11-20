@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import projeto.dados.PessoaJuridica;
@@ -29,9 +30,9 @@ public class PessoaJuridicaModel {
             st.close();
     }
 
-    public static HashSet listAll(Connection con) throws SQLException{
+    public static ArrayList listAll(Connection con) throws SQLException{
         Statement st;
-        HashSet list = new HashSet();
+        ArrayList list = new ArrayList();
 
             st = con.createStatement();
             String sql = "SELECT codCliente, nome, email, telefone, rua, bairro, cep, cnpj FROM clientes WHERE tipo=2";
@@ -57,9 +58,9 @@ public class PessoaJuridicaModel {
             return list;
     }
 
-    public static HashSet listPessoasJuridicasPrincipais(Connection con) throws SQLException{
+    public static ArrayList listPessoasJuridicasPrincipais(Connection con) throws SQLException{
         Statement st;
-        HashSet list = new HashSet();
+        ArrayList list = new ArrayList();
 
             st = con.createStatement();
             String sql = "SELECT c.codCliente, c.nome, c.email, c.telefone, c.rua, c.bairro, c.cep, c.cnpj, " + 
@@ -95,7 +96,7 @@ public class PessoaJuridicaModel {
         return list;
     }
 
-    public static HashSet listPessoasJuridicasCompraramMenosTrimestre(int tri, int ano, Connection con) throws SQLException{
+    public static ArrayList listPessoasJuridicasCompraramMenosTrimestre(int tri, int ano, Connection con) throws SQLException{
         int tri_anterior;
         int tri_anterior_ano;
 
@@ -109,7 +110,7 @@ public class PessoaJuridicaModel {
       
 
         Statement st;
-        HashSet list = new HashSet();
+        ArrayList list = new ArrayList<>();
 
             st = con.createStatement();
             String sql = "SELECT c.codCliente, c.nome, c.email, c.telefone, c.rua, c.bairro, c.cep, c.cnpj FROM clientes c " +

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import javax.swing.plaf.nimbus.State;
@@ -37,9 +38,9 @@ public class PessoaFisicaModel {
 
     
 
-    public static HashSet listAll(Connection con) throws SQLException{
+    public static ArrayList listAll(Connection con) throws SQLException{
         Statement st;
-        HashSet list = new HashSet();
+        ArrayList list = new ArrayList();
 
             st = con.createStatement();
             String sql = "SELECT codCliente, nome, datanascimento, sexo, email, telefone, rua, bairro, cep, cpf FROM clientes WHERE tipo=1";
@@ -66,9 +67,9 @@ public class PessoaFisicaModel {
         return list;
     }
 
-    public static HashSet listPessoasFisicasCompraramProdutosTrimestre(int tri, int ano, Connection con) throws SQLException{
+    public static ArrayList listPessoasFisicasCompraramProdutosTrimestre(int tri, int ano, Connection con) throws SQLException{
         Statement st;
-        HashSet list = new HashSet();
+        ArrayList list = new ArrayList();
 
             st = con.createStatement();
             String sql = "SELECT DISTINCT c.codCliente, c.nome, c.datanascimento, c.sexo, c.email, c.telefone, c.rua, c.bairro, c.cep, c.cpf " +
