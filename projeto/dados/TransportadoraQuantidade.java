@@ -20,6 +20,6 @@ public class TransportadoraQuantidade {
     @Override
     public String toString() {
         return "Nome: " + nome +
-                "Quantidade: " + quantidade;
+                "\nQuantidade: " + quantidade;
     }
 }

@@ -87,7 +87,7 @@ public class ProdutosModel {
                       "WHERE DATE_PART('MONTH', v.data) >= 10 AND DATE_PART('MONTH', v.data) <= 12 " + 
                       "AND DATE_PART('YEAR', v.data) = 2023 " + 
                       "GROUP BY p.codproduto " + 
-                      "ORDER BY lucro " +
+                      "ORDER BY lucro DESC " +
                       "LIMIT 10";
         ResultSet result = st.executeQuery(sql);
 

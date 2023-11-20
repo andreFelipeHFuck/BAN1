@@ -38,6 +38,7 @@ public class Main {
                         break;
                     case 3:
                         menuKits(con);
+                        break;
                     case 4:
                         menuVenda(con);
                         break;
@@ -48,7 +49,7 @@ public class Main {
                         menuFornecedor(con);
                         break;
                     case 7:
-
+                        menuTransportadora(con);
                         break;
                   
                     default:
@@ -59,6 +60,7 @@ public class Main {
     }
 
     public static int menu(){
+        System.out.println("\nMenu:");
         System.out.println("Informe o número da opção que deseja executar:");
         System.out.println("1 -- Clientes");
         System.out.println("2 -- Produtos");
@@ -75,15 +77,20 @@ public class Main {
     public static int opcoesCliente(){
         System.out.println("Clientes: ");
         System.out.println("Informe o número da opção que deseja executar: ");
+
+        System.out.println("\nPessoa Física");
         System.out.println("1 -- Inserir um nova Pessoa Física");
         System.out.println("2 -- Listar todas as Pessoas Físicas");
-        System.out.println("3 -- Listar todas as Pessoas Físicas que compraram em um determinada Trimestre");
+        System.out.println("3 -- Listar todas as Pessoas Físicas que compraram em um determinado Trimestre");
         System.out.println("4 -- Número de Pessoas Físicas que compraram todos os produtos");
+
+        System.out.println("\nPessoa Jurídica");
         System.out.println("5 -- Inserir um nova Pessoa Jurídica");
         System.out.println("6 -- Listar todas as Pessoas Jurídicas");
         System.out.println("7 -- Listar principais Pessoas Jurídicas");
         System.out.println("8 -- Listar Pessoas Jurídicas que compraram menos produtos do que no Trimestre anterior");
-        System.out.println("9 -- Sair");
+
+        System.out.println("\n9 -- Sair");
         System.out.println("Sua opção: ");
         return input.nextInt();
     }
@@ -131,12 +138,13 @@ public class Main {
     }
 
     public static int opcoesProduto(){
-        System.out.println("Produto: ");
+        System.out.println("\nProduto: ");
         System.out.println("Informe o número da opção que deseja executar: ");
         System.out.println("1 -- Inserir Produto");
         System.out.println("2 -- Listar todas os Produtos");
         System.out.println("3 -- Listar os 10 Produtos mais lucrativos");
-        System.out.println("4 -- ");
+        System.out.println("4 -- Listar os Produtos com Preço por Unidade de Venda acima da média");
+        System.out.println("5 -- Sair");
         System.out.println("Sua opção: ");
         return input.nextInt();
     }
@@ -159,7 +167,7 @@ public class Main {
                         new ProdutosController().listar10ProdutosMaisLucrativos(con);
                         break;
                     case 4:
-
+                        new ProdutosController().listarProdutosAcimaDaMedia(con);
                         break;
                 
                     default:
@@ -172,7 +180,7 @@ public class Main {
     }
 
     public static int opcoesVenda(){
-        System.out.println("Venda: ");
+        System.out.println("\nVenda: ");
         System.out.println("Informe o número da opção que deseja executar: ");
         System.out.println("1 -- Inserir Vendas");
         System.out.println("2 -- Listar todas as Vendas");
@@ -215,7 +223,7 @@ public class Main {
     }
 
     public static int opcoesCompra(){
-        System.out.println("Compra: ");
+        System.out.println("\nCompra: ");
         System.out.println("Informe o número da opção que deseja executar: ");
         System.out.println("1 -- Inserir Compra");
         System.out.println("2 -- Listar todas as Compras");
@@ -258,7 +266,7 @@ public class Main {
     }
 
     public static int opcoesFornecedor(){
-        System.out.println("Fornecedor: ");
+        System.out.println("\nFornecedor: ");
         System.out.println("Informe o número da opção que deseja executar: ");
         System.out.println("1 -- Inserir Fornecedor");
         System.out.println("2 -- Listar todos os Fornecedores");
@@ -301,12 +309,12 @@ public class Main {
     }
 
     public static int opcoesKits(){
-        System.out.println("Kits: ");
+        System.out.println("\nKits: ");
         System.out.println("Informe o número da opção que deseja executar: ");
         System.out.println("1 -- Inserir Kits");
         System.out.println("2 -- Listar todos os Kits");
         System.out.println("3 -- Listar os Kits e informacoes dos Produtos");
-        System.out.println("4 -- Listar a quantidade total de Produtos em Kits");
+        System.out.println("4 -- Listar a quantidade de Produtos com Datasheet por Kit");
         System.out.println("5 -- Sair");
         System.out.println("Sua opção: ");
         return input.nextInt();
@@ -330,7 +338,7 @@ public class Main {
                         new KitsController().listarKitsProdutos(con);
                         break;
                     case 4:
-                        new KitsController().listarKitsQuantidades(con);
+                        new KitsController().listarKitsQuantidadeDeProdutosComDatasheet(con);
                         break;
                     default:
                         break;
@@ -344,12 +352,13 @@ public class Main {
     }
 
     public static int opcaoTransportadora(){
-        System.out.println("Transportadora: ");
+        System.out.println("\nTransportadora: ");
         System.out.println("Informe o número da opção que deseja executar: ");
         System.out.println("1 -- Inserir Transportadora");
         System.out.println("2 -- Listar todas as Transportadoras");
-        System.out.println("3 -- Listar número de vezes que as Transportadoras foram utilizadas nas vendas");
-        System.out.println("4 -- ");
+        System.out.println("3 -- Listar número de vezes que as Transportadoras foram utilizadas nas Vendas");
+        System.out.println("4 -- Quantidade de vezes que uma Transportadora foi utilizada na Venda de um Produto");
+        System.out.println("5 -- Sair");
         System.out.println("Sua opção: ");
         return input.nextInt();
     }
@@ -372,7 +381,7 @@ public class Main {
                         new TransportadoraController().listarTransportadoraQuantidade(con);
                         break;
                     case 4:
-
+                        new TransportadoraController().listarTransportadorasUsadasParaProdutos(con);
                         break;
                     default:
                         break;

@@ -54,7 +54,8 @@ public class VendaController {
         System.out.println("Codigo Venda: " + v.getCodVenda());
 
         Clientes c = ClientesModel.getCliente(v.getCodCliente(), con);
-        System.out.println(c);
+        System.out.println("Cliente: " + c.getNome());
+        System.out.println("Email: " + c.getEmail());
 
         System.out.println("Produto: " + ProdutosModel.getNomeProduto(v.getCodProduto(), con));
         System.out.println("Transportadora: " + TransportadoraModel.getNomeTransportadora(v.getCodTransportadora(), con));

@@ -13,30 +13,45 @@ public class KitsQuantidade {
         this.quantidadeProduto = quantidadeProduto;
         this.totalProdutosEmKits = totalProdutosEmKits;
     }
+
+    public KitsQuantidade(int codKit, String nomeKit, int quantidade){
+        this.codKit = codKit;
+        this.nomeKit = nomeKit;
+        this.quantidadeProduto = quantidade;
+    }
+
     public int getCodKit() {
         return codKit;
     }
+
     public void setCodKit(int codKit) {
         this.codKit = codKit;
     }
+
     public String getNomeKit() {
         return nomeKit;
     }
+
     public void setNomeKit(String nomeKit) {
         this.nomeKit = nomeKit;
     }
+
     public int getQuantidadeProduto() {
         return quantidadeProduto;
     }
+
     public void setQuantidadeProduto(int quantidadeProduto) {
         this.quantidadeProduto = quantidadeProduto;
     }
+
     public int getTotalProdutosEmKits() {
         return totalProdutosEmKits;
     }
+
     public void setTotalProdutosEmKits(int totalProdutosEmKits) {
         this.totalProdutosEmKits = totalProdutosEmKits;
     }
+
     public String toString() {
         return "Codigo kit: " + codKit + 
                 "\nNome kit: " + nomeKit + 

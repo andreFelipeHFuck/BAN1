@@ -26,7 +26,7 @@ public class TransportadoraModel {
 
 public static HashSet<Transportadora> listAll(Connection con) throws SQLException{
     Statement st;
-    HashSet<Transportadora> list = new HashSet();
+    HashSet<Transportadora> list = new HashSet<Transportadora>();
     st = con.createStatement();
     String sql = "SELECT codTransportadora, nome, cnpj, email, custokm FROM transportadora";
     ResultSet result = st.executeQuery(sql);
@@ -122,8 +122,9 @@ public static String getNomeTransportadora(int codTransportadora, Connection con
         HashSet<TransportadoraQuantidade> list = new HashSet();
         st = con.createStatement();
 
-            String sql = "SELECT nome, COUNT(*) FROM transportadora" + 
-                         "WHERE codtransportadora IN (SELECT codtransportadora FROM venda WHERE codproduto=2) " +
+
+            String sql = "SELECT nome, COUNT(*) FROM transportadora " + 
+                         "WHERE codtransportadora IN (SELECT codtransportadora FROM venda WHERE codproduto= " + codProduto + " ) " +
                          "GROUP BY nome";
             ResultSet result = st.executeQuery(sql);
             

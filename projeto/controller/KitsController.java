@@ -91,4 +91,30 @@ public class KitsController {
             System.out.println();
         }
     }
+
+    public static void listarKitsQuantidadeDeProdutosComDatasheet(Connection con) throws SQLException{
+        HashSet<KitsQuantidade> all = KitsModel.listKitsQuantidadeDeProdutosComDatasheet(con);
+
+        System.out.println();
+        System.out.println("Lista da quantidade de Produtos com Datasheet por Kit");
+        System.out.println();
+
+        if(all.size() == 0){
+            System.out.println("Nenhum Kit encontrado");
+            System.out.println();
+        }else{
+            Iterator<KitsQuantidade> it = all.iterator();
+            while (it.hasNext()) {
+                KitsQuantidade k = (KitsQuantidade) it.next();
+
+                System.out.println("Codigo Kit: " + k.getCodKit() + 
+                                   "\nNome Kit: " + k.getNomeKit() +
+                                   "\nQuantidade: " + k.getQuantidadeProduto());
+
+                System.out.println();
+            }
+
+            System.out.println();
+        }
+    }
 }

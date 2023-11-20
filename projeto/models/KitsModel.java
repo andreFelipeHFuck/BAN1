@@ -24,6 +24,7 @@ public class KitsModel {
         st.execute();
         st.close();
     }
+
     public static HashSet<Kits> listAll(Connection con) throws SQLException{
         Statement st;
         HashSet<Kits> list = new HashSet<>();
@@ -40,6 +41,7 @@ public class KitsModel {
         }
         return list;
     }
+
     public static HashSet<KitsProdutos> listarKitsProdutos(Connection con) throws SQLException {
         Statement st;
         HashSet<KitsProdutos> list = new HashSet<>();
@@ -50,7 +52,7 @@ public class KitsModel {
             "       p.descricao, " +
             "       p.datasheet " +
             "FROM Kits k " +
-            "INNER JOIN Produtos p ON k.codProduto = p.codProduto";
+            "JOIN Produtos p ON k.codkitproduto = p.codproduto";
         ResultSet result = st.executeQuery(sql);
 
         while (result.next()) {
@@ -63,6 +65,7 @@ public class KitsModel {
         }
         return list;
     }
+
     public static HashSet<KitsQuantidade> listarKitsQuantidades(Connection con) throws SQLException {
         Statement st;
         HashSet<KitsQuantidade> list = new HashSet<>();
@@ -78,5 +81,26 @@ public class KitsModel {
                     result.getInt(4)));
         }
         return list;
+    }
+
+    public static HashSet<KitsQuantidade> listKitsQuantidadeDeProdutosComDatasheet(Connection con) throws SQLException{
+        Statement st;
+        HashSet<KitsQuantidade> list = new HashSet<KitsQuantidade>();
+
+            st = con.createStatement();
+            String sql = "SELECT codproduto, nome, COUNT(*) FROM kits " +
+                         "WHERE codkitproduto IN (SELECT codproduto FROM produtos WHERE datasheet IS NOT NULL) " +
+                         "GROUP BY codproduto, nome";
+            ResultSet result = st.executeQuery(sql);
+
+            while (result.next()) {
+                list.add(new KitsQuantidade(
+                    result.getInt(1),
+                    result.getString(2), 
+                    result.getInt(3))
+                );
+            }
+
+            return list;
     }
 }

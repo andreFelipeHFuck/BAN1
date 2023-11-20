@@ -4,7 +4,7 @@ public class ProdutosLucrativos {
     private String nome;
     private float lucro;
 
-    public ProdutosLucrativos(String nome, float luvro){
+    public ProdutosLucrativos(String nome, float lucro){
         this.nome = nome;
         this.lucro = lucro;
     }

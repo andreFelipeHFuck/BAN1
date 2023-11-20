@@ -95,7 +95,7 @@ FROM produtos p JOIN venda v ON p.codproduto=v.codproduto
 WHERE DATE_PART('MONTH', v.data) >= 10 AND DATE_PART('MONTH', v.data) <= 12
 AND DATE_PART('YEAR', v.data) = 2023
 GROUP BY p.codproduto
-ORDER BY lucro
+ORDER BY lucro DESC
 LIMIT 10;
 
 -- Subconsulta
@@ -132,16 +132,19 @@ SELECT codTransportadora, nome, cnpj, email, custokm FROM transportadora;
 
 -- JOIN
 -- 
-SELECT t.codtransportadora, t.nome, COUNT(*)
+SELECT t.codtransportadora, t.nome, COUNT(*) as quantidade
 FROM transportadora t JOIN venda v ON t.codtransportadora=v.codtransportadora
-GROUP BY t.codtransportadora;
+GROUP BY t.codtransportadora
+ORDER BY quantidade DESC;
 
 -- Subconsulta
 SELECT codtransportadora, nome, custokm
 FROM transportadora 
 WHERE custokm >= ALL (SELECT custokm FROM transportadora)
 
-
+SELECT nome, COUNT(*) FROM transportadora
+WHERE codtransportadora IN (SELECT codtransportadora FROM venda WHERE codproduto=1)
+GROUP BY nome;
 
 -- Venda
 
