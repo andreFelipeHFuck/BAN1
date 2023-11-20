@@ -1,5 +1,7 @@
 package projeto.dados;
 
+import java.text.DecimalFormat;
+
 public class Transportadora {
     private int codTransportadora;
     private String nome;
@@ -67,10 +69,12 @@ public class Transportadora {
 
     @Override
     public String toString() {
+        DecimalFormat df = new DecimalFormat("0.00");
         return "Codigo Transportadora: " + codTransportadora +
                "\nNome: " + nome + 
                "\nCNPJ: " + cnpj + 
-               "\nEmail: " + custoKM;
+               "\nEmail: " + email +
+               "\nCusto KM: R$" + df.format(custoKM);
     }
 
 }

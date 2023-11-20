@@ -17,11 +17,14 @@ public class FornecedorController {
     public void createFornecedor(Connection con) throws SQLException {
         Scanner input = new Scanner(System.in);
         System.out.println("Insira os seguintes dados para criar um novo fornecedor:");
-        System.out.println("nome:");
+
+        System.out.print("Nome:\n>");
         String nome = input.nextLine();
-        System.out.println("cnpj:");
+
+        System.out.print("CNPJ:\n>");
         String cnpj = input.nextLine();
-        System.out.println("email:");
+
+        System.out.print("Email:\n>");
         String email = input.nextLine();
 
         Fornecedor fornecedor = new Fornecedor(0, nome, cnpj, email);

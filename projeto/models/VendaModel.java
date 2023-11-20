@@ -102,4 +102,33 @@ public class VendaModel {
 
             return list;
     }
+
+    public static ArrayList listVendasComTransportadoraMaisBarata(Connection con) throws SQLException{
+        Statement st;
+        ArrayList list = new ArrayList();
+
+         st = con.createStatement();
+         String sql = "SELECT codvenda, codcliente, codproduto, quantidade, formapagamento, codtransportadora, data " +
+                      "FROM venda WHERE "+
+                      "codtransportadora IN (SELECT codtransportadora FROM transportadora  WHERE " +
+					  "custokm = (SELECT MIN(custokm) FROM transportadora))"; 
+        
+        ResultSet result = st.executeQuery(sql);
+
+            while (result.next()) {
+                list.add(
+                    new Venda(
+                        result.getInt(1),
+                        result.getInt(2),
+                        result.getInt(3),
+                        result.getInt(4),
+                        result.getString(5),
+                        result.getInt(6),
+                        result.getDate(7)
+                    )
+                );
+            }
+
+        return list;
+    }
 }

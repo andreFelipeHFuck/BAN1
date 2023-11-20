@@ -1,5 +1,7 @@
 package projeto.dados;
 
+import java.text.DecimalFormat;
+
 public class MaisComprado {
     private String nome;
     private int quantidade;
@@ -25,9 +27,10 @@ public class MaisComprado {
 
     @Override
     public String toString() {
+        DecimalFormat df = new DecimalFormat("0.00");
         return "Nome produto: " + nome +
                 "\nQuantidada: " + quantidade +
-                "\nPreço unidade compra: " + precounitcompra + 
+                "\nPreço unidade compra: R$" + df.format(precounitcompra) + 
                 "\n";
     }
 }

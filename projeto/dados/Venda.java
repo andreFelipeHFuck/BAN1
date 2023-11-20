@@ -84,8 +84,13 @@ public class Venda {
 
    @Override
    public String toString() {
-       // TODO Auto-generated method stub
-       return super.toString();
+       return "Codigo Venda: " + codVenda +
+              "\nCodigo Cliente: " + codCliente +
+              "\nCodigo Produto: " + codProduto +
+              "\nQuantidade: " + quantidade +
+              "\nForma de Pagamento: " + formaPagamento + 
+              "\nCodigo Transportadora: " + codTransportadora +
+              "\nData: " + data;
    }
 
 

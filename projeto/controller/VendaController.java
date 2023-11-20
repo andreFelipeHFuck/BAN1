@@ -63,7 +63,7 @@ public class VendaController {
         System.out.println("Quantidade: " + v.getQuantidade());
         System.out.println("Forma de pagamento: " + v.getFormaPagamento());
 
-        System.out.println(v.getData());
+        System.out.println("Data: " + v.getData());
     }
 
     public void listarVendas(Connection con) throws SQLException{
@@ -149,7 +149,28 @@ public class VendaController {
         ArrayList all = VendaModel.listVendasClientesPorTipo(tipo, con);
 
         if(all.size() == 0){
-            System.out.println("Nenhum Cliente encontrado");
+            System.out.println("Nenhum Venda encontrado");
+            System.out.println();
+        }else{
+            Iterator<Venda> it = all.iterator();
+
+            while (it.hasNext()) {
+                printVenda(it.next(), con);
+                System.out.println();
+            }
+        } 
+    }
+
+    public void listarVendasComTransportadoraMaisBarata(Connection con) throws SQLException{
+        System.out.println();
+        System.out.println("Lista das Vendas que utilizaram a Transportadora com custo KM mais barato");
+        System.out.println();
+
+        System.out.println();
+        ArrayList all = VendaModel.listVendasComTransportadoraMaisBarata(con);
+
+        if(all.size() == 0){
+            System.out.println("Nenhum Venda encontrado");
             System.out.println();
         }else{
             Iterator<Venda> it = all.iterator();

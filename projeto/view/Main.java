@@ -187,7 +187,8 @@ public class Main {
         System.out.println("2 -- Listar todas as Vendas");
         System.out.println("3 -- Listar as Formas de Pagamentos");
         System.out.println("4 -- Listar as Vendas por tipo de Cliente");
-        System.out.println("5 -- Sair");
+        System.out.println("5 -- Listar as Vendas que utilizaram a Transportadora com custo KM mais barato");
+        System.out.println("6 -- Sair");
         System.out.println("Sua opção: ");
         return input.nextInt();
     }
@@ -212,6 +213,9 @@ public class Main {
                     case 4:
                         new VendaController().listarVendasClientesPorTipo(con);
                         break;
+                    case 5:
+                        new VendaController().listarVendasComTransportadoraMaisBarata(con);
+                        break;
                     default:
                         break;
                 }
@@ -220,7 +224,7 @@ public class Main {
                 System.out.println(ex.getMessage());
                 continue;
             }
-        }while(op>0 && op<5);
+        }while(op>0 && op<6);
     }
 
     public static int opcoesCompra(){
@@ -359,7 +363,7 @@ public class Main {
         System.out.println("2 -- Listar todas as Transportadoras");
         System.out.println("3 -- Listar número de vezes que as Transportadoras foram utilizadas nas Vendas");
         System.out.println("4 -- Quantidade de vezes que uma Transportadora foi utilizada na Venda de um Produto");
-        System.out.println("5 -- Sair");
+        System.out.println("6 -- Sair");
         System.out.println("Sua opção: ");
         return input.nextInt();
     }

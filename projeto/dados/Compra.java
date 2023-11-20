@@ -69,7 +69,11 @@ public class Compra {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return super.toString();
+        return "Codigo Compra: " + codCompra +
+                "\nCodigo Fornecedor: " + codFornecedor +
+                 "\nCodigo Produto: " + codProduto +
+                 "\nQuantidade: " + quantidade + 
+                 "\nCodigo Transportadora: " + codTransportadora +
+                 "\nData: " + data;
     }
 }

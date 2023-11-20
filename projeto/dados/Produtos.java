@@ -1,5 +1,7 @@
 package projeto.dados;
 
+import java.text.DecimalFormat;
+
 public class Produtos {
     
     private int codProduto;
@@ -62,10 +64,11 @@ public class Produtos {
         this.nome = nome;
     }
     public String toString() {
+        DecimalFormat df = new DecimalFormat("0.00");
         return "Codigo Produto: " + codProduto + '\n' + 
                 "Nome: " + nome + '\n' +
-                "Preco unitario de venda: " + precoUnitVenda + '\n' +
-                "Preco unitario de compra: " + precoUnitCompra + '\n' +
+                "Preco unitario de venda: R$" + df.format(precoUnitVenda) + '\n' +
+                "Preco unitario de compra: $" + df.format(precoUnitCompra) + '\n' +
                 "Descricao: " + descricao + '\n' +
                 "Quantidade: " + quantidade + '\n' +
                 "Datasheet: " + datasheet;

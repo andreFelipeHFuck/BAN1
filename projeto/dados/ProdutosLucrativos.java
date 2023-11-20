@@ -1,5 +1,7 @@
 package projeto.dados;
 
+import java.text.DecimalFormat;
+
 public class ProdutosLucrativos {
     private String nome;
     private float lucro;
@@ -19,7 +21,8 @@ public class ProdutosLucrativos {
 
     @Override
     public String toString() {
+        DecimalFormat df = new DecimalFormat("0.00");
         return "Nome: " + nome +
-               "\nLucro: " + lucro;
+               "\nLucro: R$" + df.format(lucro);
     }
 }

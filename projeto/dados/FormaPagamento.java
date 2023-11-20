@@ -20,7 +20,6 @@ public class FormaPagamento {
     @Override
     public String toString() {
         return "Forma Pagamento: " + formaPagamento 
-                + "\nQuantidade: " + qtd
-                + "\n";
+                + "\nQuantidade: " + qtd;
     }
 }
