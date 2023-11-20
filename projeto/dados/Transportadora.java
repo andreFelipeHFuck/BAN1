@@ -16,6 +16,11 @@ public class Transportadora {
         this.custoKM = custoKM;
     }
 
+    public Transportadora(String nome, float custoKM){
+        this.nome = nome;
+        this.custoKM = custoKM;
+    }
+
     public Transportadora(){
 
     }
@@ -62,8 +67,10 @@ public class Transportadora {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return super.toString();
+        return "Codigo Transportadora: " + codTransportadora +
+               "\nNome: " + nome + 
+               "\nCNPJ: " + cnpj + 
+               "\nEmail: " + custoKM;
     }
 
 }

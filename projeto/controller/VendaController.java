@@ -67,24 +67,46 @@ public class VendaController {
 
     public void listarVendas(Connection con) throws SQLException{
         HashSet all = VendaModel.listAll(con);
-        Iterator<Venda> it = all.iterator();
 
-        while (it.hasNext()) {
-            printVenda(it.next(), con);
+        System.out.println();
+        System.out.println("Todas as Vendas realizadas pela loja:");
+        System.out.println();
+
+        if(all.size() == 0){
+            System.out.println("Nenhuma Venda encontrada");
             System.out.println();
+        }else{        
+            Iterator<Venda> it = all.iterator();
+
+             while (it.hasNext()) {
+                printVenda(it.next(), con);
+                System.out.println();
+            }
+
+            System.out.println();
+
         }
     }
 
     public void listarFormaPagamento(Connection con) throws SQLException{
         HashSet all = VendaModel.listFormaPagamento(con);
-        Iterator<FormaPagamento> it = all.iterator();
 
         System.out.println();
-        System.out.println("Forma de pagamento: ");
+        System.out.println("Formas de Pagamento:");
+        System.out.println();
 
-        while (it.hasNext()) {
-            System.out.println(it.next().toString());
+        Iterator<FormaPagamento> it = all.iterator();
+
+        if(all.size() == 0){
+            System.out.println("Nenhuma Forma de Pagamento encontrada");
             System.out.println();
+        }else{
+            while (it.hasNext()) {
+                System.out.println(it.next().toString());
+                System.out.println();
+             }
+
+             System.out.println();
         }
     }
 
@@ -109,6 +131,10 @@ public class VendaController {
     }
 
     public void listarVendasClientesPorTipo(Connection con) throws SQLException{
+        System.out.println();
+        System.out.println("Listar as Vendas por tipo de Cliente");
+        System.out.println();
+
         int tipo = tiposCliente();
 
         System.out.println();
@@ -120,11 +146,17 @@ public class VendaController {
 
         System.out.println();
         HashSet all = VendaModel.listVendasClientesPorTipo(tipo, con);
-        Iterator<Venda> it = all.iterator();
 
-        while (it.hasNext()) {
-            printVenda(it.next(), con);
+        if(all.size() == 0){
+            System.out.println("Nenhum Cliente encontrado");
             System.out.println();
-        }
+        }else{
+            Iterator<Venda> it = all.iterator();
+
+            while (it.hasNext()) {
+                printVenda(it.next(), con);
+                System.out.println();
+            }
+        } 
     }
 }

@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.sql.Date;
 
 import projeto.dados.Transportadora;
+import projeto.dados.TransportadoraQuantidade;
 import projeto.models.TransportadoraModel;
 
 
@@ -39,10 +40,21 @@ public class TransportadoraController {
 
     public static void listarTransportadoras(Connection con) throws SQLException{
         HashSet all = TransportadoraModel.listAll(con);
-        Iterator<Transportadora> it = all.iterator();
 
-        while (it.hasNext()) {
-            System.out.println(it.next().toString());
+        System.out.println();
+        System.out.println("Lista de transportadoras: ");
+        System.out.println();
+
+        if(all.size() == 0){
+            System.out.println("Nenhuma transportadora encontrada");
+            System.out.println();
+        }else{
+            Iterator<Transportadora> it = all.iterator();
+            while (it.hasNext()) {
+                System.out.println(it.next().toString());
+                System.out.println();
+            }
+
             System.out.println();
         }
     }
@@ -69,5 +81,64 @@ public class TransportadoraController {
 
         Transportadora t = (Transportadora) all.get(op - 1);
         return t.getCodTransportadora();
+    }
+
+    public static void listarTransportadoraQuantidade(Connection con) throws SQLException{
+        HashSet all = TransportadoraModel.listTransportadoraQuantidade(con);
+        Iterator<TransportadoraQuantidade> it = all.iterator();
+
+        System.out.println();
+        System.out.println("Lista das transportadoras utilizadas nas vendas,\n e a quantidade de vezes que foram utilizadas: ");
+        System.out.println();
+
+        if(all.size() == 0){
+            System.out.println("Nenhuma transportadora encontrada");
+            System.out.println();
+        }else{
+            while (it.hasNext()) {
+                System.out.println(it.next().toString());
+                System.out.println();
+            }
+
+            System.out.println();
+        }
+    }
+
+    public static void transportadoraComMaiorPreco(Connection con) throws SQLException{
+        Transportadora t = TransportadoraModel.getTransportadoraComMaiorPreco(con);
+
+        System.out.println();
+        System.out.println("Transportadora com o maior preço");
+        System.out.println();
+
+        System.out.println("Nome: " + t.getNome() +
+                            "\nCusto Km: " + t.getCustoKM()
+                            );
+    }
+
+    public static void listarTransportadorasUsadasParaProdutos(Connection con) throws SQLException{
+        System.out.println("");
+        System.out.println("Lista das Transportadoras que já foram usada na Venda de certo produto");
+        System.out.println("");
+
+        int codProduto = ProdutosController.listarProdutosEnumerados(con);
+
+        HashSet<TransportadoraQuantidade> all = TransportadoraModel.listTransportadorasUsadasParaProdutos(codProduto, con);
+
+        if(all.size() == 0){
+            System.out.println("Nenhuma Transportadora encontrada");
+            System.out.println();
+        }else{
+            Iterator<TransportadoraQuantidade> it = all.iterator();
+
+            while (it.hasNext()) {
+                System.out.println(it.next().toString());
+                System.out.println();
+            }
+
+            System.out.println();
+        }
+
+
     }
 }

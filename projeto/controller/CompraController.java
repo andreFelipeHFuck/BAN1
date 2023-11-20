@@ -61,11 +61,11 @@ public class CompraController {
         HashSet all = CompraModel.listAll(con);
 
         System.out.println();
-        System.out.println("Todas as compras realizadas pela loja:");
+        System.out.println("Todas as Compras realizadas pela loja:");
         System.out.println();
 
         if(all.size() == 0){
-            System.out.println("Nenhuma compra encontrada");
+            System.out.println("Nenhuma Compra encontrada");
             System.out.println();
         }else{
             Iterator<Compra> it = all.iterator();

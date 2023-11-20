@@ -28,13 +28,30 @@ public class KitsController {
         KitsModel.create(k, con);
         System.out.println("Kit criado com sucesso!!");
     }
+
     public void listarKits(Connection con) throws SQLException{
         HashSet<Kits> all = KitsModel.listAll(con);
-        Iterator<Kits> it = all.iterator();
-        while(it.hasNext()){
-            System.out.println(it.next().toString());
+
+        System.out.println();
+        System.out.println("Todos os Kits da loja:");
+        System.out.println();
+
+        if(all.size() == 0){
+            System.out.println("Nenhum Kit encontrado");
+            System.out.println();
+        }else{
+            Iterator<Kits> it = all.iterator();
+            while(it.hasNext()){
+                System.out.println(it.next().toString());
+                System.out.println();
+            }
+
+            System.out.println();
         }
+
+        
     }
+
     public static void listarKitsProdutos(Connection con) throws SQLException {
         HashSet<KitsProdutos> all = KitsModel.listarKitsProdutos(con);
 
@@ -43,7 +60,7 @@ public class KitsController {
         System.out.println();
 
         if(all.size() == 0) {
-            System.out.println("Nenhum kit encontrado");
+            System.out.println("Nenhum Kit encontrado");
             System.out.println();
         } else {
             Iterator<KitsProdutos> it = all.iterator();
@@ -54,6 +71,7 @@ public class KitsController {
             System.out.println();
         }
     }
+
     public static void listarKitsQuantidades(Connection con) throws SQLException {
         HashSet<KitsQuantidade> all = KitsModel.listarKitsQuantidades(con);
 
@@ -62,7 +80,7 @@ public class KitsController {
         System.out.println();
 
         if(all.size() == 0) {
-            System.out.println("Nenhum kit encontrado");
+            System.out.println("Nenhum Kit encontrado");
             System.out.println();
         } else {
             Iterator<KitsQuantidade> it = all.iterator();

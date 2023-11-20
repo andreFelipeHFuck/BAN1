@@ -1,6 +1,7 @@
 package projeto.controller;
 
 import projeto.dados.Produtos;
+import projeto.dados.ProdutosLucrativos;
 import projeto.models.ProdutosModel;
 
 import java.sql.Connection;
@@ -35,9 +36,21 @@ public class ProdutosController {
 
     public void listarProdutos(Connection con) throws SQLException {
         HashSet all = ProdutosModel.listAll(con);
-        Iterator<Produtos> it = all.iterator();
-        while(it.hasNext()){
-            System.out.println(it.next().toString());
+
+        System.out.println();
+        System.out.println("Lista dos Produtos:");
+        System.out.println();
+
+        if(all.size() == 0){
+            System.out.println("Nenhum Produto encontrado");
+            System.out.println();
+        }else{
+            Iterator<Produtos> it = all.iterator();
+            while(it.hasNext()){
+                System.out.println(it.next().toString());
+                System.out.println();
+            }
+
             System.out.println();
         }
     }
@@ -66,4 +79,58 @@ public class ProdutosController {
         return p.getCodProduto();
     }
 
+    public static void listar10ProdutosMaisLucrativos(Connection con) throws SQLException{
+        HashSet all = ProdutosModel.list10ProdutosMaisLucrativos(con);
+
+        System.out.println();
+        System.out.println("Lista dos 10 Produtos mais lucrativos:");
+        System.out.println();
+
+        if(all.size() == 0){
+            System.out.println("Nenhum Produto encontrado");
+            System.out.println();
+        }else{
+            Iterator<ProdutosLucrativos> it = all.iterator();
+            while (it.hasNext()) {
+                System.out.println(it.next().toString());
+                System.out.println();
+            }
+
+            System.out.println();
+        }
+    }
+
+    public static void produtoMaisBarato(Connection con) throws SQLException{
+        ProdutosLucrativos p = ProdutosModel.produtoMaisBarato(con);
+
+        System.out.println();
+        System.out.println("Produto mais barato: ");
+        System.out.println();
+
+       System.out.println("Nome: " + p.getNome() +
+                          "Preço: " + p.getLucro());
+
+        System.out.println();
+    }
+
+    public static void listarProdutosAcimaDaMedia(Connection con) throws SQLException{
+        HashSet all = ProdutosModel.listProdutosComPrecoAcimaMedia(con);
+
+        System.out.println();
+        System.out.println("Lista Produtos com preço de Venda acima da média:");
+        System.out.println();
+
+        if(all.size() == 0){
+            System.out.println("Nenhum produto encontrado");
+            System.out.println();
+        }else{
+            Iterator<ProdutosLucrativos> it = all.iterator();
+            while (it.hasNext()) {
+                System.out.println(it.next().toString());
+                System.out.println();
+            }
+
+            System.out.println();
+        }
+    }
 }

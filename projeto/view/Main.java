@@ -29,65 +29,45 @@ public class Main {
 
         do{
             op = menu();
-            try{
                 switch (op) {
                     case 1:
                        menuCliente(con);
                        break;
                     case 2:
-                        new TransportadoraController().createTransportadora(con);
+                        menuProduto(con);
                         break;
                     case 3:
-                        new TransportadoraController().listarTransportadoras(con);
-                        break;
+                        menuKits(con);
                     case 4:
-                        new ProdutosController().createProduto(con);
-                        break;
-                    case 5:
-                        new ProdutosController().listarProdutos(con);
-                        break;
-                    case 6:
-                        new KitsController().createKit(con);
-                        break;
-                    case 7:
-                        new KitsController().listarKits(con);
-                        break;
-                    case 8:
                         menuVenda(con);
                         break;
-                    case 9:
+                    case 5:
                         menuCompra(con);
                         break;
-                    case 10:
+                    case 6:
                         menuFornecedor(con);
                         break;
-                    case 11:
-                        menuKits(con);
+                    case 7:
+
+                        break;
+                  
                     default:
                         break;
                 }
-            }catch(SQLException ex){
-                System.out.println(ex.getMessage());
-                continue;
-            }
-        }while(op>0 && op < 11);
+        }while(op>0 && op < 8);
         con.close();
     }
 
     public static int menu(){
         System.out.println("Informe o número da opção que deseja executar:");
         System.out.println("1 -- Clientes");
-        System.out.println("2 -- Inserir uma nova transportadora");
-        System.out.println("3 -- Listar todos as Transportadoras");
-        System.out.println("4 -- Inserir um novo produto");
-        System.out.println("5 -- Listar todos os produtos");
-        System.out.println("6 -- Inserir um novo kit");
-        System.out.println("7 -- Listar todos os kits");
-        System.out.println("8 -- Venda");
-        System.out.println("9 -- Compra");
-        System.out.println("10 -- Fornecedor");
-        System.err.println("11 -- Kits");
-        System.out.println("12 -- Sair");
+        System.out.println("2 -- Produtos");
+        System.err.println("3 -- Kits");
+        System.out.println("4 -- Venda");
+        System.out.println("5 -- Compra");
+        System.out.println("6 -- Fornecedor");
+        System.out.println("7 -- Transportadora");
+        System.out.println("8 -- Sair");
         System.out.println("Sua opção: ");
         return input.nextInt();
     }
@@ -150,11 +130,52 @@ public class Main {
         }while(op>0 && op < 9);
     }
 
+    public static int opcoesProduto(){
+        System.out.println("Produto: ");
+        System.out.println("Informe o número da opção que deseja executar: ");
+        System.out.println("1 -- Inserir Produto");
+        System.out.println("2 -- Listar todas os Produtos");
+        System.out.println("3 -- Listar os 10 Produtos mais lucrativos");
+        System.out.println("4 -- ");
+        System.out.println("Sua opção: ");
+        return input.nextInt();
+    }
+
+    public static void menuProduto(Connection con){
+        int op = 0;
+
+        do{
+            op = opcoesProduto();
+
+            try{
+                switch (op) {
+                    case 1:
+                        new ProdutosController().createProduto(con);
+                        break;
+                    case 2:
+                        new ProdutosController().listarProdutos(con);
+                        break;
+                    case 3:
+                        new ProdutosController().listar10ProdutosMaisLucrativos(con);
+                        break;
+                    case 4:
+
+                        break;
+                
+                    default:
+                        break;
+                }
+            }catch(SQLException ex){
+
+            }
+        }while(op> 0 && op<5);
+    }
+
     public static int opcoesVenda(){
         System.out.println("Venda: ");
         System.out.println("Informe o número da opção que deseja executar: ");
         System.out.println("1 -- Inserir Vendas");
-        System.out.println("2 --  Listar todas as Vendas");
+        System.out.println("2 -- Listar todas as Vendas");
         System.out.println("3 -- Listar as Formas de Pagamentos");
         System.out.println("4 -- Listar as Vendas por tipo de Cliente");
         System.out.println("5 -- Sair");
@@ -235,6 +256,7 @@ public class Main {
             }
         }while(op>0 && op<5);
     }
+
     public static int opcoesFornecedor(){
         System.out.println("Fornecedor: ");
         System.out.println("Informe o número da opção que deseja executar: ");
@@ -314,6 +336,47 @@ public class Main {
                         break;
                 }
 
+            }catch(SQLException ex){
+                System.out.println(ex.getMessage());
+                continue;
+            }
+        }while(op>0 && op<5);
+    }
+
+    public static int opcaoTransportadora(){
+        System.out.println("Transportadora: ");
+        System.out.println("Informe o número da opção que deseja executar: ");
+        System.out.println("1 -- Inserir Transportadora");
+        System.out.println("2 -- Listar todas as Transportadoras");
+        System.out.println("3 -- Listar número de vezes que as Transportadoras foram utilizadas nas vendas");
+        System.out.println("4 -- ");
+        System.out.println("Sua opção: ");
+        return input.nextInt();
+    }
+
+    public static void menuTransportadora(Connection con){
+        int op = 0;
+
+        do{
+            op = opcaoTransportadora();
+
+            try{
+                switch (op) {
+                    case 1:
+                        new TransportadoraController().createTransportadora(con);
+                        break;
+                    case 2:
+                        new TransportadoraController().listarTransportadoras(con);
+                        break;
+                    case 3:
+                        new TransportadoraController().listarTransportadoraQuantidade(con);
+                        break;
+                    case 4:
+
+                        break;
+                    default:
+                        break;
+                }
             }catch(SQLException ex){
                 System.out.println(ex.getMessage());
                 continue;

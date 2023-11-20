@@ -36,9 +36,22 @@ public class ClientesController {
 
     public static void listarClientes(Connection con) throws SQLException{
         HashSet<Clientes> all = ClientesModel.listAll(con);
-        Iterator<Clientes> it = all.iterator();
-        while(it.hasNext()){
-            System.out.println(it.next().toString());
+
+        System.out.println();
+        System.out.println("Lista de todos os Clientes da Loja:");
+        System.out.println();
+
+        if(all.size() == 0){
+            System.out.println("Nenhum Cliente encontrado");
+            System.out.println();
+        }else{
+            Iterator<Clientes> it = all.iterator();
+            while(it.hasNext()){
+                System.out.println(it.next().toString());
+                System.out.println();
+            }
+
+            System.out.println();
         }
     }
 

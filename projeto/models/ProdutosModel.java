@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import projeto.dados.Produtos;
+import projeto.dados.ProdutosLucrativos;
+import projeto.dados.ProdutosQuantidade;
 
 public class ProdutosModel {
 
@@ -73,5 +75,66 @@ public class ProdutosModel {
         result.next();
 
         return result.getString(1);
+    }
+
+    public static HashSet<ProdutosLucrativos> list10ProdutosMaisLucrativos(Connection con) throws SQLException{
+        Statement st;
+        HashSet<ProdutosLucrativos> list = new HashSet();
+
+        st = con.createStatement();
+        String sql = "SELECT p.nome, (SUM(v.quantidade) * (p.precounitvenda - p.precounitcompra)) as lucro " +
+                      "FROM produtos p JOIN venda v ON p.codproduto=v.codproduto " + 
+                      "WHERE DATE_PART('MONTH', v.data) >= 10 AND DATE_PART('MONTH', v.data) <= 12 " + 
+                      "AND DATE_PART('YEAR', v.data) = 2023 " + 
+                      "GROUP BY p.codproduto " + 
+                      "ORDER BY lucro " +
+                      "LIMIT 10";
+        ResultSet result = st.executeQuery(sql);
+
+        while (result.next()) {
+            list.add(new ProdutosLucrativos(
+                    result.getString(1), 
+                    result.getFloat(2)
+                   )
+            );
+        }
+
+        return list;
+    }
+
+    public static ProdutosLucrativos produtoMaisBarato(Connection con) throws SQLException{
+        Statement st;
+
+        st = con.createStatement();
+        String sql = "SELECT nome, precounitvenda FROM produtos WHERE " + 
+                     "precounitvenda <= ALL (SELECT precounitvenda FROM produtos)";
+        ResultSet result = st.executeQuery(sql);
+
+        result.next();
+
+        ProdutosLucrativos p = new ProdutosLucrativos(result.getString(1), 
+                                                      result.getFloat(2)
+                                                    );
+
+       return p;
+    }
+
+    public static HashSet<ProdutosLucrativos> listProdutosComPrecoAcimaMedia(Connection con) throws SQLException{
+        Statement st;
+        HashSet<ProdutosLucrativos> list = new HashSet();
+
+        st = con.createStatement();
+        String sql = "SELECT nome, precounitvenda FROM produtos WHERE " +
+                     "precounitvenda > (SELECT AVG(precounitvenda) FROM produtos)";
+
+        ResultSet result = st.executeQuery(sql);
+
+        while (result.next()) {
+            list.add(new ProdutosLucrativos(
+                result.getString(1), 
+                result.getFloat(2)));
+        }
+
+        return list;
     }
 }
