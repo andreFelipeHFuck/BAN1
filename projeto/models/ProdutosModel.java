@@ -65,8 +65,6 @@ public class ProdutosModel {
         st = con.createStatement();
         String sql = "SELECT p.nome, (SUM(v.quantidade) * (p.precounitvenda - p.precounitcompra)) as lucro " +
                       "FROM produtos p JOIN venda v ON p.codproduto=v.codproduto " + 
-                      "WHERE DATE_PART('MONTH', v.data) >= 10 AND DATE_PART('MONTH', v.data) <= 12 " + 
-                      "AND DATE_PART('YEAR', v.data) = 2023 " + 
                       "GROUP BY p.codproduto " + 
                       "ORDER BY lucro DESC " +
                       "LIMIT 10";

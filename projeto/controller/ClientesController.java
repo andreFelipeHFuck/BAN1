@@ -61,6 +61,7 @@ public class ClientesController {
 
         ArrayList all = ClientesModel.listAll(con);
 
+        System.out.println("Cliente: ");
         do{
             cont = 1;
             Iterator<Clientes> it = all.iterator();

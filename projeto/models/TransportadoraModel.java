@@ -24,30 +24,9 @@ public class TransportadoraModel {
             st.close();
     }
 
-public static HashSet<Transportadora> listAll(Connection con) throws SQLException{
+public static ArrayList<Transportadora> listAll(Connection con) throws SQLException{
     Statement st;
-    HashSet<Transportadora> list = new HashSet<Transportadora>();
-    st = con.createStatement();
-    String sql = "SELECT codTransportadora, nome, cnpj, email, custokm FROM transportadora";
-    ResultSet result = st.executeQuery(sql);
-    while (result.next()) {
-        list.add(
-            new Transportadora(
-                result.getInt(1),
-                result.getString(2),
-                result.getString(3),
-                result.getString(4),
-                result.getFloat(5)
-            )
-        );
-    }
-
-    return list;
-}
-
-public static ArrayList<Transportadora> listAllArray(Connection con) throws SQLException{
-    Statement st;
-    ArrayList<Transportadora> list = new ArrayList();
+    ArrayList<Transportadora> list = new ArrayList<Transportadora>();
     st = con.createStatement();
     String sql = "SELECT codTransportadora, nome, cnpj, email, custokm FROM transportadora";
     ResultSet result = st.executeQuery(sql);

@@ -19,11 +19,10 @@ public class VendaModel {
                                    + "VALUES(?, ?, ?, ?, ?, ?)"
                                 );
     
-            st.setInt(1, v.getCodVenda());
-            st.setInt(2, v.getCodCliente());
-            st.setInt(3, v.getCodProduto());
-            st.setInt(4, v.getQuantidade());
-            st.setString(5, v.getFormaPagamento());
+            st.setInt(1, v.getCodCliente());
+            st.setInt(2, v.getCodProduto());
+            st.setInt(3, v.getQuantidade());
+            st.setString(4, v.getFormaPagamento());
             st.setInt(5, v.getCodTransportadora());
             st.setDate(6, v.getData());
             st.execute();
@@ -101,6 +100,35 @@ public class VendaModel {
             }
 
             return list;
+    }
+
+    public static ArrayList list(Connection con) throws SQLException{
+        Statement st;
+        ArrayList list = new ArrayList();
+
+         st = con.createStatement();
+         String sql = "SELECT codvenda, codcliente, codproduto, quantidade, formapagamento, codtransportadora, data " +
+                      "FROM venda WHERE "+
+                      "codtransportadora IN (SELECT codtransportadora FROM transportadora  WHERE " +
+					  "custokm = (SELECT MIN(custokm) FROM transportadora))"; 
+        
+        ResultSet result = st.executeQuery(sql);
+
+            while (result.next()) {
+                list.add(
+                    new Venda(
+                        result.getInt(1),
+                        result.getInt(2),
+                        result.getInt(3),
+                        result.getInt(4),
+                        result.getString(5),
+                        result.getInt(6),
+                        result.getDate(7)
+                    )
+                );
+            }
+
+        return list;
     }
 
     public static ArrayList listVendasComTransportadoraMaisBarata(Connection con) throws SQLException{

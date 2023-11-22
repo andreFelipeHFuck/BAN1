@@ -21,6 +21,7 @@ public class CompraController {
         Scanner input = new Scanner(System.in);
 
         System.out.println();
+
         int codProduto = ProdutosController.listarProdutosEnumerados(con);
 
         int codFornecedor = FornecedorController.listarFornecedoresEnumerados(con);

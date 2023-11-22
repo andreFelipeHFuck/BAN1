@@ -39,7 +39,7 @@ public class TransportadoraController {
     }
 
     public static void listarTransportadoras(Connection con) throws SQLException{
-        HashSet all = TransportadoraModel.listAll(con);
+        ArrayList all = TransportadoraModel.listAll(con);
 
         System.out.println();
         System.out.println("Lista de transportadoras: ");
@@ -63,7 +63,7 @@ public class TransportadoraController {
         int cont;
         int op = 0;
 
-        ArrayList all = TransportadoraModel.listAllArray(con);
+        ArrayList all = TransportadoraModel.listAll(con);
 
         System.out.println("Transportadora:");
         do{

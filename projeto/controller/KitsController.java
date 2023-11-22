@@ -21,7 +21,7 @@ public class KitsController {
         System.out.print("Nome:\n>");
         String nome = input.nextLine();
 
-        System.out.println("Produto\n>");
+        System.out.println("Produto:");
         int codProduto = ProdutosController.listarProdutosEnumerados(con);
         
         System.out.println("Produto que acompanha o Kit:");

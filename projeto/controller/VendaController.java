@@ -19,9 +19,16 @@ public class VendaController {
     public void createVenda(Connection con) throws SQLException{
         Scanner input = new Scanner(System.in);
 
+        System.out.println();
+
         int codCliente = ClientesController.listarClientesEnumerados(con);
+        System.out.println(codCliente);
+
         int codProduto = ProdutosController.listarProdutosEnumerados(con);
+        System.out.println(codProduto);
+
         int codTransportadora = TransportadoraController.listarTransportadoraEnumera(con);
+        System.out.println(codTransportadora);
 
         System.out.println("Quantidade\n>");
         int quantidade = input.nextInt();

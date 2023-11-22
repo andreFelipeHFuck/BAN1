@@ -49,9 +49,7 @@ public class PessoaFisicaController {
         String bairro = input.nextLine();
 
         System.out.print("CEP:\n> ");
-        int cep = input.nextInt();
-
-        input.nextLine();
+        int cep = Integer.parseInt(input.nextLine());
 
         System.out.print("CPF:\n> ");
         String cpf = input.nextLine();
