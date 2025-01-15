@@ -1,2 +1,3 @@
-# BAN1
-Repositório da disciplina de Banco de Dados 1 (BAN1)
+# API REST para uma loja de componentes eletrônicos
+
+Projeto de uma API REST para uma loja ficitícia de venda de componentes eletrônicos diversos, construída com base no banco de dados do trabalho final da disciplina de banco de dados I (BAN I). A API fornece principalmente informações sobre os produtos disponíveis no estoque da loja, sobre os clientes (tendo tanto clientes físicos quanto jurídicos), fornecedores do qual a loja compra seus produtos, e sobre a transportadoras que realizam o frete dos produtos tanto para a loja quanto para os clientes. Também é possível adicionar uma nova compra feita por um cliente ou realizada pela própria empresa para manter o seu estoque.

@@ -1,6 +1,8 @@
 {
+    
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "projeto/libs/postgresql-42.6.0.jar"
-    ]
+    ],
+    "standard.autoFixOnSave": true
 }
